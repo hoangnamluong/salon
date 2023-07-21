@@ -4,12 +4,10 @@ import java.util.ArrayList;
 
 import ou.lhn.salon.db.DatabaseHelper;
 import ou.lhn.salon.db.model.Salon;
-import ou.lhn.salon.db.repository.Salon.SalonRepository;
-import ou.lhn.salon.db.repository.Salon.SalonRepositoryImpl;
 
-public class SalonServiceImpl implements SalonService {
+public class SalonServiceImpl implements SalonSerivce {
     private static SalonServiceImpl INSTANCE;
-    private final SalonRepository salonRepository = SalonRepositoryImpl.getInstance();
+    private final DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
 
     private SalonServiceImpl() {
     }

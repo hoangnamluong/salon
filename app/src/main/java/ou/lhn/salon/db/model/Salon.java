@@ -5,27 +5,29 @@ import androidx.annotation.Nullable;
 import java.util.Date;
 
 public class Salon {
-    private static int count = 1;
     private int id;
     private String name;
     private String address;
     private String description;
     private boolean active;
-    private final Date createdAt = new Date();
+    private Date createdAt = new Date();
     private Date updatedAt;
     private String image;
+    private int managerId;
 
     public Salon() {
     }
 
-    public Salon(String name, String address, String description, boolean active, String image) {
-        this.id = count++;
+    public Salon(int id, String name, String address, String description, boolean active, Date createdAt, Date updatedAt, String image, int managerId) {
+        this.id = id;
         this.name = name;
         this.address = address;
         this.description = description;
         this.active = active;
-        this.updatedAt = new Date();
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
         this.image = image;
+        this.managerId = managerId;
     }
 
     @Override
@@ -38,7 +40,8 @@ public class Salon {
                 ", active=" + active +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
-                ", image='" + image +
+                ", image='" + image + '\'' +
+                ", managerId=" + managerId +
                 '}';
     }
 
@@ -86,6 +89,10 @@ public class Salon {
         return createdAt;
     }
 
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public Date getUpdatedAt() {
         return updatedAt;
     }
@@ -100,5 +107,13 @@ public class Salon {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public int getManagerId() {
+        return managerId;
+    }
+
+    public void setManagerId(int managerId) {
+        this.managerId = managerId;
     }
 }

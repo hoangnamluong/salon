@@ -4,8 +4,7 @@ import java.util.Date;
 
 public class User {
     private int id;
-    private String firstName;
-    private String lastName;
+    private String fullName;
     private String username;
     private String password;
     private String email;
@@ -21,10 +20,9 @@ public class User {
     public User() {
     }
 
-    public User(int id, String firstName, String lastName, String username, String password, String email, String phone, Date birth, Boolean gender, Boolean active, Date createdAt, Date updatedAt, int roleId, String avatar) {
+    public User(int id, String fullName, String username, String password, String email, String phone, Date birth, boolean gender, boolean active, Date createdAt, Date updatedAt, int roleId, String avatar) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.fullName = fullName;
         this.username = username;
         this.password = password;
         this.email = email;
@@ -42,9 +40,9 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", fullName='" + fullName + '\'' +
                 ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", birth=" + birth +
@@ -61,24 +59,16 @@ public class User {
         return id;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getUsername() {
@@ -135,6 +125,14 @@ public class User {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public Date getUpdatedAt() {

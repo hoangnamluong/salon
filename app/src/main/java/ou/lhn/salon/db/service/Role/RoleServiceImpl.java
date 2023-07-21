@@ -4,12 +4,10 @@ import java.util.ArrayList;
 
 import ou.lhn.salon.db.DatabaseHelper;
 import ou.lhn.salon.db.model.Role;
-import ou.lhn.salon.db.repository.Role.RoleRepository;
-import ou.lhn.salon.db.repository.Role.RoleRepositoryImpl;
 
 public class RoleServiceImpl implements RoleService {
     private static RoleServiceImpl INSTANCE;
-    private final RoleRepository roleRepository = RoleRepositoryImpl.getInstance();
+    private final DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
 
     private RoleServiceImpl() {
     }

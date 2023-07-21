@@ -8,13 +8,12 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import ou.lhn.salon.db.DatabaseHelper;
 import ou.lhn.salon.db.model.User;
-import ou.lhn.salon.db.repository.Auth.AuthRepository;
-import ou.lhn.salon.db.repository.Auth.AuthRepositoryImpl;
 
 public class AuthServiceImpl implements AuthService {
     private static AuthServiceImpl INSTANCE;
-    private final AuthRepository authRepository = AuthRepositoryImpl.getInstance();
+    private final DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
 
     private AuthServiceImpl() {
     }
@@ -40,7 +39,8 @@ public class AuthServiceImpl implements AuthService {
         return false;
     }
 
-    public String encrypt(String value) {
+
+    private String encrypt(String value) {
         try{
             SecretKeySpec secretKeySpec = new SecretKeySpec(AuthConstant.getSecretKey().getBytes(), AuthConstant.getALGORITHM());
 
@@ -57,7 +57,7 @@ public class AuthServiceImpl implements AuthService {
         }
     }
 
-    public String decrypt(String value) {
+    private String decrypt(String value) {
         try{
             byte[] decodedData = Base64.decode(value, Base64.DEFAULT);
 

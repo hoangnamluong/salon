@@ -21,7 +21,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private AppCompatButton registerBtnRegister;
     private TextView registerTxtLogin, registerTxtError;
     private ProgressBar registerLoadingBar;
-    private AuthServiceImpl authService = AuthServiceImpl.getInstance();
+    private AuthService authService = AuthServiceImpl.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,8 +117,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 });
             }
         }).start(); */
-
-        Toast.makeText(this, authService.encrypt(registerEditTxtPassword.getText().toString()), Toast.LENGTH_SHORT).show();
     }
 
     private void loginSwitchActivity() {

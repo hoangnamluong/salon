@@ -41,14 +41,6 @@ public class SalonListActivity extends AppCompatActivity implements RecyclerView
     private void setUpSalonModels() {
         String[] salonName = getResources().getStringArray(R.array.salon_name);
         String[] salonAddress = getResources().getStringArray(R.array.salon_address);
-
-        for(int i = 0; i < salonName.length; i++) {
-            salonModels.add(new Salon(salonName[i],
-                    salonAddress[i],
-                    "temp",
-                    true,
-                    "null"));
-        }
     }
 
     private void setUpSalonRecView(SalonAdapter adapter) {

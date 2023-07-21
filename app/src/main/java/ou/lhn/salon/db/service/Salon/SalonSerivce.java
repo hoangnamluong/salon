@@ -1,10 +1,10 @@
-package ou.lhn.salon.db.repository.Salon;
+package ou.lhn.salon.db.service.Salon;
 
 import java.util.ArrayList;
 
 import ou.lhn.salon.db.model.Salon;
 
-public interface SalonRepository {
+public interface SalonSerivce {
     ArrayList<Salon> getAllSalons();
     Salon getSalonById(int id);
     boolean addSalon(Salon salon);

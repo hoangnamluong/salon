@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import ou.lhn.salon.db.model.User;
 
-public interface UserService {
+public interface UserSerivce {
     ArrayList<User> getAllUsers();
     User getUserById(int id);
     boolean addUser(User user);

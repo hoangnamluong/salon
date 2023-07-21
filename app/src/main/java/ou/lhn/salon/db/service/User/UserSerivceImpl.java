@@ -1,4 +1,4 @@
-package ou.lhn.salon.db.repository.User;
+package ou.lhn.salon.db.service.User;
 
 import android.database.sqlite.SQLiteDatabase;
 
@@ -7,18 +7,18 @@ import java.util.ArrayList;
 import ou.lhn.salon.db.DatabaseHelper;
 import ou.lhn.salon.db.model.User;
 
-public class UserRepositoryImpl implements UserRepository {
-    private static UserRepositoryImpl INSTANCE;
+public class UserSerivceImpl implements UserSerivce {
+    private static UserSerivceImpl INSTANCE;
     private final DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
 
-    private UserRepositoryImpl() {
+    private UserSerivceImpl() {
     }
 
-    public static UserRepositoryImpl getInstance() {
+    public static UserSerivceImpl getInstance() {
         if(INSTANCE == null) {
-            synchronized (UserRepositoryImpl.class) {
+            synchronized (UserSerivceImpl.class) {
                 if(INSTANCE == null)
-                    INSTANCE = new UserRepositoryImpl();
+                    INSTANCE = new UserSerivceImpl();
             }
         }
 
