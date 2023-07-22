@@ -13,12 +13,12 @@ public class Salon {
     private Date createdAt = new Date();
     private Date updatedAt;
     private String image;
-    private int managerId;
+    private User manager;
 
     public Salon() {
     }
 
-    public Salon(int id, String name, String address, String description, boolean active, Date createdAt, Date updatedAt, String image, int managerId) {
+    public Salon(int id, String name, String address, String description, boolean active, Date createdAt, Date updatedAt, String image, User manager) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -27,7 +27,7 @@ public class Salon {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.image = image;
-        this.managerId = managerId;
+        this.manager = manager;
     }
 
     @Override
@@ -41,7 +41,7 @@ public class Salon {
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 ", image='" + image + '\'' +
-                ", managerId=" + managerId +
+                ", manager=" + manager +
                 '}';
     }
 
@@ -109,11 +109,11 @@ public class Salon {
         this.image = image;
     }
 
-    public int getManagerId() {
-        return managerId;
+    public User getManager() {
+        return manager;
     }
 
-    public void setManagerId(int managerId) {
-        this.managerId = managerId;
+    public void setManager(User manager) {
+        this.manager = manager;
     }
 }

@@ -5,17 +5,17 @@ public class Service {
     private String name;
     private String description;
     private int price;
-    private int salonId;
+    private Salon salon;
 
     public Service() {
     }
 
-    public Service(int id, String name, String description, int price, int salonId) {
+    public Service(int id, String name, String description, int price, Salon salon) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
-        this.salonId = salonId;
+        this.salon = salon;
     }
 
     @Override
@@ -25,7 +25,7 @@ public class Service {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
-                ", salonId=" + salonId +
+                ", salon=" + salon +
                 '}';
     }
 
@@ -61,11 +61,11 @@ public class Service {
         this.price = price;
     }
 
-    public int getSalonId() {
-        return salonId;
+    public Salon getSalon() {
+        return salon;
     }
 
-    public void setSalonId(int salonId) {
-        this.salonId = salonId;
+    public void setSalon(Salon salon) {
+        this.salon = salon;
     }
 }

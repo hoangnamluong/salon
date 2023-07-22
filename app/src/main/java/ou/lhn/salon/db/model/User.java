@@ -14,13 +14,13 @@ public class User {
     private boolean active;
     private Date createdAt;
     private Date updatedAt;
-    private int roleId;
+    private String role;
     private String avatar;
 
     public User() {
     }
 
-    public User(int id, String fullName, String username, String password, String email, String phone, Date birth, boolean gender, boolean active, Date createdAt, Date updatedAt, int roleId, String avatar) {
+    public User(int id, String fullName, String username, String password, String email, String phone, Date birth, boolean gender, boolean active, Date createdAt, Date updatedAt, String role, String avatar) {
         this.id = id;
         this.fullName = fullName;
         this.username = username;
@@ -32,7 +32,7 @@ public class User {
         this.active = active;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.roleId = roleId;
+        this.role = role;
         this.avatar = avatar;
     }
 
@@ -50,7 +50,7 @@ public class User {
                 ", active=" + active +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
-                ", roleId=" + roleId +
+                ", role='" + role + '\'' +
                 ", avatar='" + avatar + '\'' +
                 '}';
     }
@@ -143,12 +143,12 @@ public class User {
         this.updatedAt = updatedAt;
     }
 
-    public int getRoleId() {
-        return roleId;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getAvatar() {

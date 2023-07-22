@@ -7,5 +7,6 @@
     <color name="icon_primary">#da77b6</color>
     <color name="smoke">#cccccc</color>
     <color name="text_smoke">#777777</color>
+    <color name="light_gray">#dddddd</color>
     <color name="danger">#cc0000</color>
 </resources>

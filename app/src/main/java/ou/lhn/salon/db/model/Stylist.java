@@ -5,17 +5,17 @@ public class Stylist {
     private String name;
     private int customerPerDay;
     private boolean active;
-    private int salonId;
+    private Salon salon;
 
     public Stylist() {
     }
 
-    public Stylist(int id, String name, int customerPerDay, boolean active, int salonId) {
+    public Stylist(int id, String name, int customerPerDay, boolean active, Salon salon) {
         this.id = id;
         this.name = name;
         this.customerPerDay = customerPerDay;
         this.active = active;
-        this.salonId = salonId;
+        this.salon = salon;
     }
 
     @Override
@@ -25,7 +25,7 @@ public class Stylist {
                 ", name='" + name + '\'' +
                 ", customerPerDay=" + customerPerDay +
                 ", active=" + active +
-                ", salonId=" + salonId +
+                ", salon=" + salon +
                 '}';
     }
 
@@ -61,11 +61,11 @@ public class Stylist {
         this.active = active;
     }
 
-    public int getSalonId() {
-        return salonId;
+    public Salon getSalon() {
+        return salon;
     }
 
-    public void setSalonId(int salonId) {
-        this.salonId = salonId;
+    public void setSalon(Salon salon) {
+        this.salon = salon;
     }
 }

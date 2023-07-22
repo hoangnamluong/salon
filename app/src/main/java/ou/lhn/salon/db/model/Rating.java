@@ -4,18 +4,18 @@ public class Rating {
     private int id;
     private int rating;
     private boolean active;
-    private int customerId;
-    private int stylistId;
+    private User customer;
+    private Stylist stylist;
 
     public Rating() {
     }
 
-    public Rating(int id, int rating, boolean active, int customerId, int stylistId) {
+    public Rating(int id, int rating, boolean active, User customer, Stylist stylist) {
         this.id = id;
         this.rating = rating;
         this.active = active;
-        this.customerId = customerId;
-        this.stylistId = stylistId;
+        this.customer = customer;
+        this.stylist = stylist;
     }
 
     @Override
@@ -24,8 +24,8 @@ public class Rating {
                 "id=" + id +
                 ", rating=" + rating +
                 ", active=" + active +
-                ", customerId=" + customerId +
-                ", stylistId=" + stylistId +
+                ", customer=" + customer +
+                ", stylist=" + stylist +
                 '}';
     }
 
@@ -53,19 +53,19 @@ public class Rating {
         this.active = active;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public User getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setCustomer(User customer) {
+        this.customer = customer;
     }
 
-    public int getStylistId() {
-        return stylistId;
+    public Stylist getStylist() {
+        return stylist;
     }
 
-    public void setStylistId(int stylistId) {
-        this.stylistId = stylistId;
+    public void setStylist(Stylist stylist) {
+        this.stylist = stylist;
     }
 }

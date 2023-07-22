@@ -13,9 +13,11 @@
         android:theme="@style/Theme.Salon"
         tools:targetApi="31">
         <activity
+            android:name=".activity.BookingHistoryActivityStaff"
+            android:exported="false" />
+        <activity
             android:name=".activity.SalonListActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".activity.RegisterActivity"
             android:exported="false" />

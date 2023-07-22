@@ -5,17 +5,17 @@ public class Schedule {
     private String dayInWeek;
     private String fromTime;
     private String toTime;
-    private int salonId;
+    private Salon salon;
 
     public Schedule() {
     }
 
-    public Schedule(int id, String dayInWeek, String fromTime, String toTime, int salonId) {
+    public Schedule(int id, String dayInWeek, String fromTime, String toTime, Salon salon) {
         this.id = id;
         this.dayInWeek = dayInWeek;
         this.fromTime = fromTime;
         this.toTime = toTime;
-        this.salonId = salonId;
+        this.salon = salon;
     }
 
     @Override
@@ -25,7 +25,7 @@ public class Schedule {
                 ", dayInWeek='" + dayInWeek + '\'' +
                 ", fromTime='" + fromTime + '\'' +
                 ", toTime='" + toTime + '\'' +
-                ", salonId=" + salonId +
+                ", salon=" + salon +
                 '}';
     }
 
@@ -61,11 +61,11 @@ public class Schedule {
         this.toTime = toTime;
     }
 
-    public int getSalonId() {
-        return salonId;
+    public Salon getSalon() {
+        return salon;
     }
 
-    public void setSalonId(int salonId) {
-        this.salonId = salonId;
+    public void setSalon(Salon salon) {
+        this.salon = salon;
     }
 }

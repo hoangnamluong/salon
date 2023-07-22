@@ -6,26 +6,28 @@ public class Appointment {
     private int id;
     private Date appointmentDate;
     private String appointmentTime;
+    private int cost;
     private String status;
     private boolean active;
-    private int voucherId;
-    private int customerId;
-    private int stylistId;
-    private int serviceId;
+    private Voucher voucher;
+    private User customer;
+    private Stylist stylist;
+    private Service service;
 
     public Appointment() {
     }
 
-    public Appointment(int id, Date appointmentDate, String appointmentTime, String status, boolean active, int voucherId, int customerId, int stylistId, int serviceId) {
+    public Appointment(int id, Date appointmentDate, String appointmentTime, int cost, String status, boolean active, Voucher voucher, User customer, Stylist stylist, Service service) {
         this.id = id;
         this.appointmentDate = appointmentDate;
         this.appointmentTime = appointmentTime;
+        this.cost = cost;
         this.status = status;
         this.active = active;
-        this.voucherId = voucherId;
-        this.customerId = customerId;
-        this.stylistId = stylistId;
-        this.serviceId = serviceId;
+        this.voucher = voucher;
+        this.customer = customer;
+        this.stylist = stylist;
+        this.service = service;
     }
 
     @Override
@@ -34,12 +36,13 @@ public class Appointment {
                 "id=" + id +
                 ", appointmentDate=" + appointmentDate +
                 ", appointmentTime='" + appointmentTime + '\'' +
+                ", cost=" + cost +
                 ", status='" + status + '\'' +
                 ", active=" + active +
-                ", voucherId=" + voucherId +
-                ", customerId=" + customerId +
-                ", stylistId=" + stylistId +
-                ", serviceId=" + serviceId +
+                ", voucher=" + voucher +
+                ", customer=" + customer +
+                ", stylist=" + stylist +
+                ", service=" + service +
                 '}';
     }
 
@@ -67,6 +70,14 @@ public class Appointment {
         this.appointmentTime = appointmentTime;
     }
 
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -83,35 +94,35 @@ public class Appointment {
         this.active = active;
     }
 
-    public int getVoucherId() {
-        return voucherId;
+    public Voucher getVoucher() {
+        return voucher;
     }
 
-    public void setVoucherId(int voucherId) {
-        this.voucherId = voucherId;
+    public void setVoucher(Voucher voucher) {
+        this.voucher = voucher;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public User getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setCustomer(User customer) {
+        this.customer = customer;
     }
 
-    public int getStylistId() {
-        return stylistId;
+    public Stylist getStylist() {
+        return stylist;
     }
 
-    public void setStylistId(int stylistId) {
-        this.stylistId = stylistId;
+    public void setStylist(Stylist stylist) {
+        this.stylist = stylist;
     }
 
-    public int getServiceId() {
-        return serviceId;
+    public Service getService() {
+        return service;
     }
 
-    public void setServiceId(int serviceId) {
-        this.serviceId = serviceId;
+    public void setService(Service service) {
+        this.service = service;
     }
 }
