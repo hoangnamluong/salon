@@ -1,6 +1,8 @@
 package ou.lhn.salon.db.model;
 
-public class Service {
+import java.io.Serializable;
+
+public class Service implements Serializable {
     private int id;
     private String name;
     private String description;

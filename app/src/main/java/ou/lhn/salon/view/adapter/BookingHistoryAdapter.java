@@ -11,13 +11,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import ou.lhn.salon.R;
 import ou.lhn.salon.db.model.Appointment;
 
 public class BookingHistoryAdapter extends ArrayAdapter<Appointment> {
-    private int ID = 9991;
     private ArrayList<Appointment> list;
     private Context context;
     private int layoutId;
@@ -42,7 +42,7 @@ public class BookingHistoryAdapter extends ArrayAdapter<Appointment> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         ViewHolder viewHolder = null;
 
-        if(convertView == null || convertView.getTag(ID) == null) {
+        if(convertView == null || convertView.getTag() == null) {
             convertView = LayoutInflater.from(context).inflate(layoutId, null);
             viewHolder = new ViewHolder();
 
@@ -52,18 +52,17 @@ public class BookingHistoryAdapter extends ArrayAdapter<Appointment> {
             viewHolder.bhiTxtServiceName = convertView.findViewById(R.id.bhiTxtServiceName);
             viewHolder.bhiTxtCost = convertView.findViewById(R.id.bhiTxtCost);
 
-            convertView.setTag(ID, viewHolder);
+            convertView.setTag(viewHolder);
         }
         else {
-            viewHolder = (ViewHolder) convertView.getTag(ID);
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
         Appointment appointment = list.get(position);
-        String bookedDate = appointment.getAppointmentDate() + " " + appointment.getAppointmentTime();
 
         viewHolder.bhiTxtCustomerName.setText(appointment.getCustomer().getFullName());
         viewHolder.bhiTxtCustomPhone.setText(appointment.getCustomer().getPhone());
-        viewHolder.bhiTxtBookedDate.setText(bookedDate);
+        viewHolder.bhiTxtBookedDate.setText(new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(appointment.getAppointmentDate()));
         viewHolder.bhiTxtServiceName.setText(appointment.getService().getName());
         viewHolder.bhiTxtCost.setText(appointment.getCost());
 

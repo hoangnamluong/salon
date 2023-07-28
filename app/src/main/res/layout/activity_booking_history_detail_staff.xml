@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="@drawable/home_banner_staff"
+    tools:context=".activity.BookingHistoryDetailActivityStaff">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bhdHeader"
+        />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contentPadding="8dp"
+        app:cardCornerRadius="10dp"
+        app:cardUseCompatPadding="true"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/baseline_price_check_24"
+                android:layout_marginEnd="16dp"
+                />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Salon Name"
+                    android:id="@+id/bhdTxtSalonName"
+                    android:textSize="18sp"
+                    android:textColor="@color/text_smoke"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Customer Name"
+                    android:textSize="24sp"
+                    android:layout_marginTop="8dp"
+                    android:textStyle="bold"
+                    android:id="@+id/bhdTxtCustomerName"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contentPadding="8dp"
+        app:cardCornerRadius="10dp"
+        app:cardUseCompatPadding="true"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/appointment_information"
+                android:layout_gravity="center"
+                android:textColor="@color/text_smoke"
+                />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                >
+                <TableRow
+                    android:layout_marginBottom="8dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/appointment_time"
+                        android:textColor="@color/text_smoke"
+                        android:layout_weight="1"
+                        />
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="appointmentTime"
+                        android:textColor="@color/black"
+                        android:id="@+id/bhdTxtInfoAppointTime"
+                        android:layout_gravity="right"
+                        />
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginBottom="8dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/service_name"
+                        android:textColor="@color/text_smoke"
+                        android:layout_weight="1"
+                        />
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="serviceName"
+                        android:textColor="@color/black"
+                        android:id="@+id/bhdTxtInfoServiceName"
+                        android:layout_gravity="right"
+                        />
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginBottom="8dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/service_price"
+                        android:textColor="@color/text_smoke"
+                        android:layout_weight="1"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="right">
+
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="servicePrice"
+                            android:textColor="@color/black"
+                            android:id="@+id/bhdTxtInfoServicePrice"
+                            />
+
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="@string/vnd"
+                            android:textColor="@color/black"
+                            android:layout_marginStart="4dp"
+                            />
+                    </LinearLayout>
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginBottom="8dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/voucher"
+                        android:textColor="@color/text_smoke"
+                        android:layout_weight="1"
+                        />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="right"
+                        >
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="-"
+                            android:textColor="@color/black"
+                            android:layout_marginEnd="4dp"
+                            />
+
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="voucherPrice"
+                            android:textColor="@color/black"
+                            android:id="@+id/bhdTxtInfoVoucherPrice"
+                            />
+
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="@string/vnd"
+                            android:textColor="@color/black"
+                            android:layout_marginStart="4dp"
+                            />
+                    </LinearLayout>
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginTop="16dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Cost"
+                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        />
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="cost"
+                        android:textColor="@color/black"
+                        android:id="@+id/bhdTxtInfoTotalCost"
+                        android:layout_gravity="right"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        />
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/vnd"
+                        android:textColor="@color/text_smoke"
+                        android:layout_marginStart="4dp"
+                        android:textSize="14sp"
+                        android:layout_gravity="center"
+                        />
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contentPadding="8dp"
+        app:cardCornerRadius="10dp"
+        app:cardUseCompatPadding="true"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/customer_information"
+                android:layout_gravity="center"
+                android:textColor="@color/text_smoke"
+                />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                >
+                <TableRow
+                    android:layout_marginBottom="8dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/customer_name"
+                        android:textColor="@color/text_smoke"
+                        android:layout_weight="1"
+                        />
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="customerName"
+                        android:textColor="@color/black"
+                        android:id="@+id/bhdTxtInfoCustomerName"
+                        android:layout_gravity="right"
+                        />
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginBottom="8dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/customer_phone"
+                        android:textColor="@color/text_smoke"
+                        android:layout_weight="1"
+                        />
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="customerPhone"
+                        android:textColor="@color/black"
+                        android:id="@+id/bhdTxtInfoCustomerPhone"
+                        android:layout_gravity="right"
+                        />
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginBottom="8dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/customer_email"
+                        android:textColor="@color/text_smoke"
+                        android:layout_weight="1"
+                        />
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="customerEmail"
+                        android:textColor="@color/black"
+                        android:id="@+id/bhdTxtInfoCustomer"
+                        android:layout_gravity="right"
+                        />
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contentPadding="8dp"
+        app:cardCornerRadius="10dp"
+        app:cardUseCompatPadding="true"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Stylist Information"
+                android:layout_gravity="center"
+                android:textColor="@color/text_smoke"
+                />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                >
+                <TableRow
+                    android:layout_marginBottom="8dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/customer_name"
+                        android:textColor="@color/text_smoke"
+                        android:layout_weight="1"
+                        />
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="stylistName"
+                        android:textColor="@color/black"
+                        android:id="@+id/bhdTxtInfoStylistName"
+                        android:layout_gravity="right"
+                        />
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

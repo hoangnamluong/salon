@@ -5,7 +5,6 @@ import java.util.Date;
 public class Appointment {
     private int id;
     private Date appointmentDate;
-    private String appointmentTime;
     private int cost;
     private String status;
     private boolean active;
@@ -13,14 +12,14 @@ public class Appointment {
     private User customer;
     private Stylist stylist;
     private Service service;
+    private Salon salon;
 
     public Appointment() {
     }
 
-    public Appointment(int id, Date appointmentDate, String appointmentTime, int cost, String status, boolean active, Voucher voucher, User customer, Stylist stylist, Service service) {
+    public Appointment(int id, Date appointmentDate, int cost, String status, boolean active, Voucher voucher, User customer, Stylist stylist, Service service, Salon salon) {
         this.id = id;
         this.appointmentDate = appointmentDate;
-        this.appointmentTime = appointmentTime;
         this.cost = cost;
         this.status = status;
         this.active = active;
@@ -28,6 +27,7 @@ public class Appointment {
         this.customer = customer;
         this.stylist = stylist;
         this.service = service;
+        this.salon = salon;
     }
 
     @Override
@@ -35,7 +35,6 @@ public class Appointment {
         return "Appointment{" +
                 "id=" + id +
                 ", appointmentDate=" + appointmentDate +
-                ", appointmentTime='" + appointmentTime + '\'' +
                 ", cost=" + cost +
                 ", status='" + status + '\'' +
                 ", active=" + active +
@@ -43,6 +42,7 @@ public class Appointment {
                 ", customer=" + customer +
                 ", stylist=" + stylist +
                 ", service=" + service +
+                ", salon=" + salon +
                 '}';
     }
 
@@ -60,14 +60,6 @@ public class Appointment {
 
     public void setAppointmentDate(Date appointmentDate) {
         this.appointmentDate = appointmentDate;
-    }
-
-    public String getAppointmentTime() {
-        return appointmentTime;
-    }
-
-    public void setAppointmentTime(String appointmentTime) {
-        this.appointmentTime = appointmentTime;
     }
 
     public int getCost() {
@@ -124,5 +116,13 @@ public class Appointment {
 
     public void setService(Service service) {
         this.service = service;
+    }
+
+    public Salon getSalon() {
+        return salon;
+    }
+
+    public void setSalon(Salon salon) {
+        this.salon = salon;
     }
 }

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/staffMainFrame"
+        />
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottomAppBar"
+        android:layout_gravity="bottom"
+        android:backgroundTint="@color/primary"
+        app:fabAlignmentMode="end"
+        app:fabCradleRoundedCornerRadius="20dp"
+        app:fabCradleMargin="10dp"
+        app:elevation="4dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetEnd="0dp"
+        >
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            app:menu="@menu/bottom_nav_menu"
+            android:background="@android:color/transparent"
+            app:elevation="0dp"
+            app:labelVisibilityMode="labeled"
+            android:id="@+id/bottomAppMenu"
+            android:layout_marginEnd="100dp"
+            app:itemActiveIndicatorStyle="@android:color/transparent"
+            app:itemIconTint="@drawable/bottom_nav_color"
+            app:itemTextColor="@drawable/bottom_nav_color"
+            />
+    </com.google.android.material.bottomappbar.BottomAppBar>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/primary"
+        android:src="@drawable/ic_add_icon"
+        app:maxImageSize="60dp"
+        app:layout_anchor="@id/bottomAppBar"
+        app:shapeAppearanceOverlay="@style/rounded_circle"
+        />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

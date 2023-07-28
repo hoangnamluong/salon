@@ -1,8 +1,9 @@
 package ou.lhn.salon.db.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Voucher {
+public class Voucher implements Serializable {
     private int id;
     private String code;
     private int percentage;

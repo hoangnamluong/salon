@@ -19,6 +19,19 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="search">Search</string>
+    <string name="customer_information">Customer Information</string>
+    <string name="customer_name">Full Name</string>
+    <string name="customer_phone">Phone Number</string>
+    <string name="customer_email">Email</string>
+    <string name="appointment_information">Appointment Information</string>
+    <string name="service_name">Service Name</string>
+    <string name="appointment_time">Appointment Time</string>
+    <string name="service_price">Service Price</string>
+    <string name="voucher">Voucher</string>
+    <string name="vnd">VND</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_history">History</string>
+    <string name="welcome_back">Welcome back</string>
 
     <string-array name="salon_name">
         <item>Siu thị tóc</item>
@@ -40,4 +53,33 @@
         <item>467 Bà Huyện Thanh Quan</item>
         <item>11/5a Xa lộ Ming Híu</item>
     </string-array>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="logout">Logout</string>
+    <string name="pick_stylist">Select Stylist</string>
+    <string name="select_date">Select Date</string>
+    <string name="select_time">Select Time</string>
+    <string name="enter_voucher">Enter Voucher</string>
+    <string name="member">Member</string>
+    <string name="new_customer">New Customer</string>
+    <string name="confirm">CONFIRM</string>
+    <string name="check_member">Check Member</string>
+    <string name="cancel">Cancel</string>
+    <string name="choose_stylist">Choose Stylist</string>
+    <string name="available">Available</string>
+    <string name="loading">Loading...</string>
 </resources>

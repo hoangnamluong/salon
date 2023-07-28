@@ -13,16 +13,13 @@
         android:theme="@style/Theme.Salon"
         tools:targetApi="31">
         <activity
-            android:name=".activity.BookingHistoryActivityStaff"
+            android:name=".activity.BookingConfirmActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.SalonListActivity"
-            android:exported="false"></activity>
-        <activity
-            android:name=".activity.RegisterActivity"
+            android:name=".activity.StylistSelectActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".activity.BookingActivityStaff"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,6 +27,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.HomeFragmentStaff"
+            android:exported="false" />
+        <activity
+            android:name=".activity.StaffMainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.HeaderFragment"
+            android:exported="false" />
+        <activity
+            android:name=".activity.BookingHistoryDetailActivityStaff"
+            android:exported="false" />
+        <activity
+            android:name=".activity.BookingHistoryFragmentStaff"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SalonListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
