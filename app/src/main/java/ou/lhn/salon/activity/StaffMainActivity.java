@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -15,12 +16,32 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.util.Date;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+
 import ou.lhn.salon.R;
+import ou.lhn.salon.data.Constant;
+import ou.lhn.salon.data.GlobalState;
+import ou.lhn.salon.db.model.Appointment;
+import ou.lhn.salon.db.model.Salon;
+import ou.lhn.salon.db.model.Service;
+import ou.lhn.salon.db.model.Stylist;
+import ou.lhn.salon.db.model.User;
+import ou.lhn.salon.db.service.Appointment_db.AppointmentService;
+import ou.lhn.salon.db.service.Appointment_db.AppointmentServiceImpl;
+import ou.lhn.salon.db.service.Auth_db.AuthConstant;
+import ou.lhn.salon.db.service.User_db.UserService;
+import ou.lhn.salon.db.service.User_db.UserServiceImpl;
 import ou.lhn.salon.util.InitData;
 import ou.lhn.salon.util.ReplaceFragment;
 
 public class StaffMainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager = getSupportFragmentManager();
+
+    private UserService userService = UserServiceImpl.getInstance(this);
 
     private BottomNavigationView bottomNavigationView;
     private FloatingActionButton mStaffFloatingBtn;
@@ -34,6 +55,8 @@ public class StaffMainActivity extends AppCompatActivity {
         initView();
         ReplaceFragment.replaceFragment(fragmentManager, new HomeFragmentStaff(), R.id.staffMainFrame);
         initListener();
+
+        GlobalState.setLoggedIn(userService.getUserById(2));
     }
 
     private void initView() {
@@ -69,5 +92,22 @@ public class StaffMainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private String encrypt(String value) {
+        try{
+            SecretKeySpec secretKeySpec = new SecretKeySpec(AuthConstant.getSecretKey().getBytes(), AuthConstant.getALGORITHM());
+
+            Cipher cipher = Cipher.getInstance(AuthConstant.getMODE());
+
+            cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec, new IvParameterSpec(AuthConstant.getIV().getBytes()));
+
+            byte[] encryptedData = cipher.doFinal(value.getBytes());
+
+            return Base64.encodeToString(encryptedData, Base64.DEFAULT);
+        } catch(Exception ex) {
+            ex.printStackTrace();
+            return "Encrypt Error!";
+        }
     }
 }

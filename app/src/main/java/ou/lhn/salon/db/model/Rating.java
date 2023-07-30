@@ -1,6 +1,8 @@
 package ou.lhn.salon.db.model;
 
-public class Rating {
+import java.io.Serializable;
+
+public class Rating implements Serializable {
     private int id;
     private int rating;
     private boolean active;

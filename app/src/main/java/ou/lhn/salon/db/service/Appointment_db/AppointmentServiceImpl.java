@@ -121,15 +121,13 @@ public class AppointmentServiceImpl implements AppointmentService{
     }
 
     @Override
-    public ArrayList<Appointment> getPendingAppointments(int salonId, Context context) {
-        UserService userService = UserServiceImpl.getInstance(context);
-
+    public ArrayList<Appointment> getPendingAppointments(int salonId) {
         SQLiteDatabase read = databaseHelper.getReadableDatabase();
-        String query = "SELECT a.*" +
+        String query = "SELECT a.*, u.*" +
                 " FROM " + DatabaseConstant.TABLE_SALON + " s, " +
                         DatabaseConstant.TABLE_USER + " u, " +
                         DatabaseConstant.TABLE_APPOINTMENT + " a" +
-                " WHERE u." + DatabaseConstant.FK_USER_SALON + " = s." + DatabaseConstant.SALON_ID +
+                " WHERE a." + DatabaseConstant.FK_APPOINTMENT_CUSTOMER + " = u." + DatabaseConstant.USER_ID  +
                 " AND a." + DatabaseConstant.FK_APPOINTMENT_SALON + " = s." + DatabaseConstant.SALON_ID +
                 " AND s." + DatabaseConstant.SALON_ID + " = " + salonId +
                 " AND a." + DatabaseConstant.APPOINTMENT_STATUS + " = '" + Constant.Status.PENDING.value + "'";
@@ -139,7 +137,7 @@ public class AppointmentServiceImpl implements AppointmentService{
         Cursor cursor = read.rawQuery(query, null);
 
         if(cursor == null || cursor.getCount() == 0)
-            return null;
+            return returnList;
 
         cursor.moveToFirst();
 
@@ -151,16 +149,25 @@ public class AppointmentServiceImpl implements AppointmentService{
                 int cost = cursor.getInt(3);
                 String status = cursor.getString(4);
 
+                User user = new User();
                 Service service = new Service();
                 Stylist stylist = new Stylist();
                 Voucher voucher = new Voucher();
                 Salon salon = new Salon();
 
-                User user = userService.getUserById(cursor.getInt(5));
                 service.setId(cursor.getInt(6));
                 stylist.setId(cursor.getInt(7));
                 voucher.setId(cursor.getInt(8));
                 salon.setId(cursor.getInt(9));
+
+                user.setId(cursor.getInt(10));
+                user.setFullName(cursor.getString(11));
+                user.setUsername(cursor.getString(12));
+                user.setEmail(cursor.getString(14));
+                user.setPhone(cursor.getString(15));
+                user.setActive(cursor.getInt(16) == 1);
+                user.setRole(cursor.getInt(17));
+                user.setAvatar(cursor.getBlob(18));
 
                 returnList.add(new Appointment(id, date, active, cost, status, user, service, stylist, voucher, salon));
             } catch (ParseException e) {
@@ -172,15 +179,13 @@ public class AppointmentServiceImpl implements AppointmentService{
     }
 
     @Override
-    public ArrayList<Appointment> getCompletedAppointments(int salonId, Context context) {
-        UserService userService = UserServiceImpl.getInstance(context);
-
+    public ArrayList<Appointment> getCompletedAppointments(int salonId) {
         SQLiteDatabase read = databaseHelper.getReadableDatabase();
-        String query = "SELECT a.*" +
+        String query = "SELECT a.*, u.*" +
                 " FROM " + DatabaseConstant.TABLE_SALON + " s, " +
                 DatabaseConstant.TABLE_USER + " u, " +
                 DatabaseConstant.TABLE_APPOINTMENT + " a" +
-                " WHERE u." + DatabaseConstant.FK_USER_SALON + " = s." + DatabaseConstant.SALON_ID +
+                " WHERE a." + DatabaseConstant.FK_APPOINTMENT_CUSTOMER + " = u." + DatabaseConstant.USER_ID  +
                 " AND a." + DatabaseConstant.FK_APPOINTMENT_SALON + " = s." + DatabaseConstant.SALON_ID +
                 " AND s." + DatabaseConstant.SALON_ID + " = " + salonId +
                 " AND a." + DatabaseConstant.APPOINTMENT_STATUS + " = '" + Constant.Status.COMPLETED.value + "'";
@@ -190,7 +195,7 @@ public class AppointmentServiceImpl implements AppointmentService{
         Cursor cursor = read.rawQuery(query, null);
 
         if(cursor == null || cursor.getCount() == 0)
-            return null;
+            return returnList;
 
         cursor.moveToFirst();
 
@@ -202,9 +207,27 @@ public class AppointmentServiceImpl implements AppointmentService{
                 int cost = cursor.getInt(3);
                 String status = cursor.getString(4);
 
-                User user = userService.getUserById(cursor.getInt(5));
+                User user = new User();
+                Service service = new Service();
+                Stylist stylist = new Stylist();
+                Voucher voucher = new Voucher();
+                Salon salon = new Salon();
 
-                returnList.add(new Appointment(id, date, active, cost, status, user, null ,null ,null, null));
+                service.setId(cursor.getInt(6));
+                stylist.setId(cursor.getInt(7));
+                voucher.setId(cursor.getInt(8));
+                salon.setId(cursor.getInt(9));
+
+                user.setId(cursor.getInt(10));
+                user.setFullName(cursor.getString(11));
+                user.setUsername(cursor.getString(12));
+                user.setEmail(cursor.getString(14));
+                user.setPhone(cursor.getString(15));
+                user.setActive(cursor.getInt(16) == 1);
+                user.setRole(cursor.getInt(17));
+                user.setAvatar(cursor.getBlob(18));
+
+                returnList.add(new Appointment(id, date, active, cost, status, user, service, stylist, voucher, salon));
             } catch (ParseException e) {
                 throw new RuntimeException(e);
             }
@@ -218,9 +241,15 @@ public class AppointmentServiceImpl implements AppointmentService{
         SQLiteDatabase write = databaseHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(DatabaseConstant.APPOINTMENT_DATE, appointment.getAppointmentDate().getTime());
+        try {
+            contentValues.put(DatabaseConstant.APPOINTMENT_DATE, DateTimeFormat.convertDateToSqliteDate(appointment.getAppointmentDate()));
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
         contentValues.put(DatabaseConstant.APPOINTMENT_STATUS, appointment.getStatus());
         contentValues.put(DatabaseConstant.APPOINTMENT_ACTIVE, appointment.isActive());
+        contentValues.put(DatabaseConstant.APPOINTMENT_COST, appointment.getCost());
         contentValues.put(DatabaseConstant.FK_APPOINTMENT_SERVICE, appointment.getService().getId());
         contentValues.put(DatabaseConstant.FK_APPOINTMENT_SALON, appointment.getSalon().getId());
         contentValues.put(DatabaseConstant.FK_APPOINTMENT_CUSTOMER, appointment.getCustomer().getId());

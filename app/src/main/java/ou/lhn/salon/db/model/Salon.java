@@ -2,10 +2,11 @@ package ou.lhn.salon.db.model;
 
 import androidx.annotation.Nullable;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
 
-public class Salon {
+public class Salon implements Serializable {
     private int id;
     private String name;
     private String address;

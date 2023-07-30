@@ -89,8 +89,9 @@ public class BookingHistoryFragmentStaff extends Fragment {
     }
 
     private void initListView() {
-        appointments = appointmentService.getPendingAppointments(1, getContext());
+        appointments = appointmentService.getPendingAppointments(1) ;
         adapter = new BookingHistoryAdapter(getContext(), R.layout.list_view_booking_history_item, appointments);
+        bhsLvBookingHistory.setAdapter(adapter);
     }
 
     private void initListener() {
@@ -123,25 +124,15 @@ public class BookingHistoryFragmentStaff extends Fragment {
         int itemId = item.getItemId();
 
         if (itemId == R.id.bhmPending) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    appointments.clear();
-                    appointments.addAll(appointmentService.getPendingAppointments(1, getContext()));
-                    adapter.notifyDataSetChanged();
-                }
-            }).start();
+            appointments.clear();
+            appointments.addAll(appointmentService.getPendingAppointments(1));
+            adapter.notifyDataSetChanged();
 
             return true;
         } else if (itemId == R.id.bhmCompleted) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    appointments.clear();
-                    appointments.addAll(appointmentService.getCompletedAppointments(1, getContext()));
-                    adapter.notifyDataSetChanged();
-                }
-            }).start();
+            appointments.clear();
+            appointments.addAll(appointmentService.getCompletedAppointments(1));
+            adapter.notifyDataSetChanged();
 
             return true;
         }

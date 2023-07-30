@@ -64,7 +64,7 @@ public class StylistSelectAdapter extends ArrayAdapter<Stylist> {
 
         int stylistAvailable = stylistService.countCustomerToday(stylist.getId());
 
-        viewHolder.stylistImgAvatar.setImageBitmap(BytesBitmapConverter.getBitmapFromBytes(stylist.getImage()));
+
         viewHolder.stylistTxtName.setText(stylist.getName().toString());
 
         if(stylistAvailable == stylist.getCustomerPerDay()) {

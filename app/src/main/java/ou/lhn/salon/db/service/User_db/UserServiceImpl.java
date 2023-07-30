@@ -1,5 +1,6 @@
 package ou.lhn.salon.db.service.User_db;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -38,12 +39,53 @@ public class UserServiceImpl implements UserService {
         return new ArrayList<>();
     }
 
-    public User getUserById(int id) {
-        return null;
+    public User getUserById(int userId) {
+        SQLiteDatabase read = databaseHelper.getReadableDatabase();
+        String query = "SELECT *" +
+                " FROM " + DatabaseConstant.TABLE_USER +
+                " WHERE " + DatabaseConstant.USER_ID + " = " + userId;
+
+        Cursor cursor = read.rawQuery(query, null);
+
+        if(cursor == null || cursor.getCount() == 0)
+            return null;
+
+        cursor.moveToFirst();
+
+        int id = cursor.getInt(0);
+        String fullName = cursor.getString(1);
+        String username = cursor.getString(2);
+        String email = cursor.getString(4);
+        String phone = cursor.getString(5);
+        boolean active = cursor.getInt(6) == 1;
+        int role = cursor.getInt(7);
+        byte[] avatar = cursor.getBlob(8);
+
+        Salon salon = new Salon();
+        salon.setId(cursor.getInt(9));
+
+        return new User(id, fullName, username, "", email, phone, active, role, avatar, salon);
     }
 
     public boolean addUser(User user) {
-        return false;
+        SQLiteDatabase write = databaseHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(DatabaseConstant.USER_FULL_NAME, user.getFullName());
+        contentValues.put(DatabaseConstant.USER_USERNAME, user.getUsername());
+        contentValues.put(DatabaseConstant.USER_PASSWORD, user.getPassword());
+        contentValues.put(DatabaseConstant.USER_EMAIL, user.getEmail());
+        contentValues.put(DatabaseConstant.USER_PHONE, user.getPhone());
+        contentValues.put(DatabaseConstant.USER_ACTIVE, user.isActive());
+        contentValues.put(DatabaseConstant.USER_ROLE, user.getRole());
+        contentValues.put(DatabaseConstant.USER_AVATAR, user.getAvatar());
+        if(user.getSalon() != null) {
+            contentValues.put(DatabaseConstant.FK_USER_SALON, user.getSalon().getId());
+        }
+
+        long result = write.insert(DatabaseConstant.TABLE_USER, null, contentValues);
+
+        return result != -1;
     }
 
     public boolean updateUser(User user) {

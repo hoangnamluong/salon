@@ -73,7 +73,7 @@ public class BookingHistoryDetailActivityStaff extends AppCompatActivity {
         bhdTxtInfoTotalCost = findViewById(R.id.bhdTxtInfoTotalCost);
         bhdTxtInfoCustomerName = findViewById(R.id.bhdTxtCustomerName);
         bhdTxtInfoCustomerPhone = findViewById(R.id.bhdTxtInfoCustomerPhone);
-        bhdTxtInfoCustomerEmail = findViewById(R.id.bookingConfirmTxtInfoCustomerEmail);
+        bhdTxtInfoCustomerEmail = findViewById(R.id.bhdTxtInfoCustomerEmail);
         bhdTxtInfoStylistName = findViewById(R.id.bhdTxtInfoStylistName);
     }
 
@@ -99,7 +99,12 @@ public class BookingHistoryDetailActivityStaff extends AppCompatActivity {
     }
 
     private void attachDataToView() {
-        long voucherPrice = (appointment.getVoucher().getPercentage() / Constant.PERCENT_100) * appointment.getService().getPrice();
+        if(appointment.getVoucher() != null) {
+            long voucherPrice = (appointment.getVoucher().getPercentage() / Constant.PERCENT_100) * appointment.getService().getPrice();
+            bhdTxtInfoVoucherPrice.setText(String.format("%d", voucherPrice));
+        } else {
+            bhdTxtInfoVoucherPrice.setText("0");
+        }
 
         bhdTxtSalonName.setText(appointment.getSalon().getName().toString());
         bhdTxtCustomerName.setText(appointment.getCustomer().getFullName().toString());
@@ -110,7 +115,7 @@ public class BookingHistoryDetailActivityStaff extends AppCompatActivity {
         }
         bhdTxtInfoServiceName.setText(appointment.getService().getName().toString());
         bhdTxtInfoServicePrice.setText(String.format("%d", appointment.getService().getPrice()));
-        bhdTxtInfoVoucherPrice.setText(String.format("%d", voucherPrice));
+
         bhdTxtInfoTotalCost.setText(String.format("%d", appointment.getCost()));
         bhdTxtInfoCustomerName.setText(appointment.getCustomer().getFullName().toString());
         bhdTxtInfoCustomerPhone.setText(appointment.getCustomer().getPhone());

@@ -45,19 +45,18 @@
                 >
 
                 <TextView
+                    android:id="@+id/profileTxtUsername"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="fullName"
-                    android:id="@+id/profileTxtUsername"
+                    android:text="Mạnh Linh"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
                     android:textSize="20sp"
-                    />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="email"
+                    android:text="ling@gmail.com"
                     android:id="@+id/profileTxtEmail"
                     android:textColor="@color/text_smoke"
                     android:layout_marginTop="24dp"

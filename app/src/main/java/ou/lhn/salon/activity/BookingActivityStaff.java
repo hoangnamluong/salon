@@ -89,8 +89,8 @@ public class BookingActivityStaff extends AppCompatActivity {
 
         initView();
         inflateHeader();
-        initListener();
         initService();
+        initListener();
     }
 
     private void initView() {

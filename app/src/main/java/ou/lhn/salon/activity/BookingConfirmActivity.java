@@ -128,7 +128,7 @@ public class BookingConfirmActivity extends AppCompatActivity {
             bookingConfirmTxtInfoTotalCost.setText(String.format("%d", service.getPrice()));
         }
 
-        /*new Thread(new Runnable() {
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 runOnUiThread(new Runnable() {
@@ -138,7 +138,7 @@ public class BookingConfirmActivity extends AppCompatActivity {
                     }
                 });
 
-                salon = salonSerivce.getSalonByStaffId(GlobalState.getLoggedIn().getId());
+                salon = salonSerivce.getSalonById(GlobalState.getLoggedIn().getSalon().getId());
 
                 runOnUiThread(new Runnable() {
                     @Override
@@ -151,7 +151,7 @@ public class BookingConfirmActivity extends AppCompatActivity {
                     }
                 });
             }
-        }).start();*/
+        }).start();
     }
 
     private void initListener() {
@@ -179,18 +179,19 @@ public class BookingConfirmActivity extends AppCompatActivity {
 
                 Appointment appointment = new Appointment(1, calendar.getTime(), true, totalCost, Constant.Status.PENDING.value, customer, service, stylist, voucher, salon);
 
+                if(appointmentService.addAppointment(appointment)) {
+                    Intent intent = new Intent(BookingConfirmActivity.this, StaffMainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                }
+
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         alertDialog.dismiss();
+                        Toast.makeText(BookingConfirmActivity.this, "Booking Succeed", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-                /*if(appointmentService.addAppointment(appointment)) {
-                    Intent intent = new Intent(BookingConfirmActivity.this, StaffMainActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                }*/
 
                 Intent intent = new Intent(BookingConfirmActivity.this, StaffMainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TASK);

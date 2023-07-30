@@ -1,6 +1,8 @@
 package ou.lhn.salon.db.model;
 
-public class Schedule {
+import java.io.Serializable;
+
+public class Schedule implements Serializable {
     private int id;
     private String dayInWeek;
     private String fromTime;

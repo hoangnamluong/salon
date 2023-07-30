@@ -6,7 +6,7 @@ import ou.lhn.salon.db.model.User;
 
 public interface UserService {
     ArrayList<User> getAllUsers();
-    User getUserById(int id);
+    User getUserById(int userId);
     boolean addUser(User user);
     boolean updateUser(User user);
     boolean deleteUser(int id);
