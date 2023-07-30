@@ -1,7 +1,6 @@
 package ou.lhn.salon.db.service.Appointment_db;
 
 import android.content.Context;
-
 import java.util.ArrayList;
 
 import ou.lhn.salon.db.model.Appointment;

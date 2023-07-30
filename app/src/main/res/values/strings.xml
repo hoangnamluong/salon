@@ -82,9 +82,25 @@
     <string name="choose_stylist">Choose Stylist</string>
     <string name="available">Available</string>
     <string name="loading">Loading...</string>
+
+    <string-array name="roles">
+        <item>Admin</item>
+        <item>Người dùng thường</item>
+        <item>Nhân viên</item>
+        <item>Quản lý salon</item>
+    </string-array>
+
+    <integer-array name="roleValues">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </integer-array>
+
     <string name="pending">Pending</string>
     <string name="completed">Completed</string>
     <string name="by_date">By Date</string>
     <string name="by_month">By Month</string>
     <string name="by_year">By Year</string>
+
 </resources>
