@@ -12,6 +12,7 @@ import java.util.Date;
 import ou.lhn.salon.db.DatabaseConstant;
 import ou.lhn.salon.db.DatabaseHelper;
 import ou.lhn.salon.db.model.Voucher;
+import ou.lhn.salon.util.DateTimeFormat;
 
 public class VoucherServiceImpl implements VoucherService{
     private static VoucherServiceImpl INSTANCE;
@@ -58,12 +59,39 @@ public class VoucherServiceImpl implements VoucherService{
 
         Date expiredDate;
         try {
-            expiredDate = SimpleDateFormat.getDateTimeInstance().parse(cursor.getString(3));
+            expiredDate = DateTimeFormat.convertSqliteDateToDate(cursor.getString(3));
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
 
         return new Voucher(id, code1, percentage, expiredDate, active);
+    }
+
+    @Override
+    public Voucher getVoucherById(int voucherId) {
+        SQLiteDatabase read = databaseHelper.getReadableDatabase();
+        String query = "SELECT * " +
+                "FROM " + DatabaseConstant.TABLE_VOUCHER +
+                " WHERE " + DatabaseConstant.VOUCHER_ID + " = " + voucherId;
+
+        Cursor cursor = read.rawQuery(query, null);
+
+        if (cursor == null || cursor.getCount() == 0)
+            return null;
+
+        int id = cursor.getInt(0);
+        String code = cursor.getString(1);
+        int percentage = cursor.getInt(2);
+        boolean active = cursor.getInt(4) == 1;
+
+        Date expiredDate;
+        try {
+            expiredDate = DateTimeFormat.convertSqliteDateToDate(cursor.getString(3));
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        return new Voucher(id, code, percentage, expiredDate, active);
     }
 
     @Override

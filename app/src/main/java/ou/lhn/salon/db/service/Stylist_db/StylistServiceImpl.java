@@ -59,6 +59,30 @@ public class StylistServiceImpl implements StylistService{
     }
 
     @Override
+    public Stylist getStylistById(int stylistId) {
+        SQLiteDatabase read = databaseHelper.getReadableDatabase();
+        String query = "SELECT * FROM " + DatabaseConstant.TABLE_STYLIST +
+                " WHERE " + DatabaseConstant.STYLIST_ID + " = " + stylistId;
+
+        ArrayList<Stylist> returnList = new ArrayList<>();
+        Cursor cursor = read.rawQuery(query, null);
+
+        if(cursor == null || cursor.getCount() == 0) {
+            return null;
+        }
+
+        cursor.moveToFirst();
+
+        int id = cursor.getInt(0);
+        String name = cursor.getString(1);
+        int customerPerDay = cursor.getInt(2);
+        boolean active = cursor.getInt(3) == 1;
+        byte[] avatar = cursor.getBlob(4);
+
+        return new Stylist(id, name, customerPerDay, active, null, avatar);
+    }
+
+    @Override
     public boolean addStylist(Stylist stylist) {
         SQLiteDatabase write = databaseHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();

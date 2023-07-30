@@ -73,13 +73,6 @@ public class StylistSelectActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(StylistSelectActivity.this, "Getting Salon Services", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
                 stylists = stylistService.getAllStylist();
 
                 if(stylists == null || stylists.size() == 0) {

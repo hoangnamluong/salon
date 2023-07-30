@@ -5,11 +5,23 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
+import ou.lhn.salon.data.Constant;
 import ou.lhn.salon.db.DatabaseConstant;
 import ou.lhn.salon.db.DatabaseHelper;
 import ou.lhn.salon.db.model.Appointment;
+import ou.lhn.salon.db.model.Salon;
+import ou.lhn.salon.db.model.Service;
+import ou.lhn.salon.db.model.Stylist;
+import ou.lhn.salon.db.model.User;
+import ou.lhn.salon.db.model.Voucher;
+import ou.lhn.salon.db.service.User_db.UserService;
+import ou.lhn.salon.db.service.User_db.UserServiceImpl;
+import ou.lhn.salon.util.DateTimeFormat;
 
 public class AppointmentServiceImpl implements AppointmentService{
     private static AppointmentServiceImpl INSTANCE;
@@ -50,6 +62,152 @@ public class AppointmentServiceImpl implements AppointmentService{
 
         do{
 
+        } while(cursor.moveToNext());
+
+        return returnList;
+    }
+
+    @Override
+    public ArrayList<Appointment> getAppointmentsByDate(int year, int month, int date, int salonId, Context context) {
+        UserService userService = UserServiceImpl.getInstance(context);
+
+        SQLiteDatabase read = databaseHelper.getReadableDatabase();
+        String query = "SELECT a.*" +
+                " FROM " + DatabaseConstant.TABLE_SALON + " s, " +
+                DatabaseConstant.TABLE_USER + " u, " +
+                DatabaseConstant.TABLE_APPOINTMENT + " a" +
+                " WHERE u." + DatabaseConstant.FK_USER_SALON + " = s." + DatabaseConstant.SALON_ID +
+                " AND a." + DatabaseConstant.FK_APPOINTMENT_SALON + " = s." + DatabaseConstant.SALON_ID +
+                " AND s." + DatabaseConstant.SALON_ID + " = " + salonId + " " ;
+
+        if(year != -1) {
+            query += "AND strftime('%Y', " + DatabaseConstant.APPOINTMENT_DATE + ")" + " = " + year + " ";
+        }
+
+        if(month != -1) {
+            query += "AND strftime('%m', " + DatabaseConstant.APPOINTMENT_DATE + ")" + " = " + month + " ";
+        }
+
+        if (date != -1) {
+            query += "AND strftime('%d', " + DatabaseConstant.APPOINTMENT_DATE + ")" + " = " + date + " ";
+        }
+
+        ArrayList<Appointment> returnList = new ArrayList<>();
+
+        Cursor cursor = read.rawQuery(query, null);
+
+        if(cursor == null || cursor.getCount() == 0)
+            return null;
+
+        cursor.moveToFirst();
+
+        do{
+            try {
+                int id = cursor.getInt(0);
+                Date date1 = DateTimeFormat.convertSqliteDateToDate(cursor.getString(1));
+                boolean active = cursor.getInt(2) == 1;
+                int cost = cursor.getInt(3);
+                String status = cursor.getString(4);
+
+                User user = userService.getUserById(cursor.getInt(5));
+
+                returnList.add(new Appointment(id, date1, active, cost, status, user, null ,null ,null, null));
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+        } while(cursor.moveToNext());
+
+        return returnList;
+    }
+
+    @Override
+    public ArrayList<Appointment> getPendingAppointments(int salonId, Context context) {
+        UserService userService = UserServiceImpl.getInstance(context);
+
+        SQLiteDatabase read = databaseHelper.getReadableDatabase();
+        String query = "SELECT a.*" +
+                " FROM " + DatabaseConstant.TABLE_SALON + " s, " +
+                        DatabaseConstant.TABLE_USER + " u, " +
+                        DatabaseConstant.TABLE_APPOINTMENT + " a" +
+                " WHERE u." + DatabaseConstant.FK_USER_SALON + " = s." + DatabaseConstant.SALON_ID +
+                " AND a." + DatabaseConstant.FK_APPOINTMENT_SALON + " = s." + DatabaseConstant.SALON_ID +
+                " AND s." + DatabaseConstant.SALON_ID + " = " + salonId +
+                " AND a." + DatabaseConstant.APPOINTMENT_STATUS + " = '" + Constant.Status.PENDING.value + "'";
+
+        ArrayList<Appointment> returnList = new ArrayList<>();
+
+        Cursor cursor = read.rawQuery(query, null);
+
+        if(cursor == null || cursor.getCount() == 0)
+            return null;
+
+        cursor.moveToFirst();
+
+        do{
+            try {
+                int id = cursor.getInt(0);
+                Date date = DateTimeFormat.convertSqliteDateToDate(cursor.getString(1));
+                boolean active = cursor.getInt(2) == 1;
+                int cost = cursor.getInt(3);
+                String status = cursor.getString(4);
+
+                Service service = new Service();
+                Stylist stylist = new Stylist();
+                Voucher voucher = new Voucher();
+                Salon salon = new Salon();
+
+                User user = userService.getUserById(cursor.getInt(5));
+                service.setId(cursor.getInt(6));
+                stylist.setId(cursor.getInt(7));
+                voucher.setId(cursor.getInt(8));
+                salon.setId(cursor.getInt(9));
+
+                returnList.add(new Appointment(id, date, active, cost, status, user, service, stylist, voucher, salon));
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+        } while(cursor.moveToNext());
+
+        return returnList;
+    }
+
+    @Override
+    public ArrayList<Appointment> getCompletedAppointments(int salonId, Context context) {
+        UserService userService = UserServiceImpl.getInstance(context);
+
+        SQLiteDatabase read = databaseHelper.getReadableDatabase();
+        String query = "SELECT a.*" +
+                " FROM " + DatabaseConstant.TABLE_SALON + " s, " +
+                DatabaseConstant.TABLE_USER + " u, " +
+                DatabaseConstant.TABLE_APPOINTMENT + " a" +
+                " WHERE u." + DatabaseConstant.FK_USER_SALON + " = s." + DatabaseConstant.SALON_ID +
+                " AND a." + DatabaseConstant.FK_APPOINTMENT_SALON + " = s." + DatabaseConstant.SALON_ID +
+                " AND s." + DatabaseConstant.SALON_ID + " = " + salonId +
+                " AND a." + DatabaseConstant.APPOINTMENT_STATUS + " = '" + Constant.Status.COMPLETED.value + "'";
+
+        ArrayList<Appointment> returnList = new ArrayList<>();
+
+        Cursor cursor = read.rawQuery(query, null);
+
+        if(cursor == null || cursor.getCount() == 0)
+            return null;
+
+        cursor.moveToFirst();
+
+        do{
+            try {
+                int id = cursor.getInt(0);
+                Date date = DateTimeFormat.convertSqliteDateToDate(cursor.getString(1));
+                boolean active = cursor.getInt(2) == 1;
+                int cost = cursor.getInt(3);
+                String status = cursor.getString(4);
+
+                User user = userService.getUserById(cursor.getInt(5));
+
+                returnList.add(new Appointment(id, date, active, cost, status, user, null ,null ,null, null));
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
         } while(cursor.moveToNext());
 
         return returnList;

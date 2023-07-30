@@ -47,5 +47,6 @@
         app:maxImageSize="60dp"
         app:layout_anchor="@id/bottomAppBar"
         app:shapeAppearanceOverlay="@style/rounded_circle"
+        android:id="@+id/mStaffFloatingBtn"
         />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -58,6 +58,60 @@ public class ServiceServiceImpl implements ServiceService{
     }
 
     @Override
+    public Service getServiceById(int serviceId) {
+        SQLiteDatabase read = databaseHelper.getReadableDatabase();
+        String query = "SELECT * FROM " + DatabaseConstant.TABLE_SERVICE +
+                " WHERE " + DatabaseConstant.SERVICE_ID + " = " + serviceId;
+
+        Cursor cursor = read.rawQuery(query, null);
+        ArrayList<Service> returnList = new ArrayList<>();
+
+        if(cursor == null || cursor.getCount() == 0) {
+            return null;
+        }
+
+        cursor.moveToFirst();
+
+        int id = cursor.getInt(0);
+        String name = cursor.getString(1);
+        String description = cursor.getString(2);
+        int price = cursor.getInt(3);
+        int salon_id = cursor.getInt(4);
+
+        return new Service(id, name, description, price, null);
+    }
+
+    /*@Override
+    public ArrayList<Service> getServiceByAppointmentId(int appointmentId) {
+        SQLiteDatabase read = databaseHelper.getReadableDatabase();
+        String query = "SELECT s.*" +
+                " FROM " + DatabaseConstant.TABLE_SERVICE + " s, " + DatabaseConstant.TABLE_APPOINTMENT + " a" +
+                " WHERE " + DatabaseConstant.FK_APPOINTMENT_SERVICE + " = " + DatabaseConstant.SERVICE_ID +
+                " AND " + DatabaseConstant.APPOINTMENT_ID + " = " + appointmentId;
+
+        Cursor cursor = read.rawQuery(query, null);
+        ArrayList<Service> returnList = new ArrayList<>();
+
+        if(cursor == null || cursor.getCount() == 0) {
+            return null;
+        }
+
+        cursor.moveToFirst();
+
+        do {
+            int id = cursor.getInt(0);
+            String name = cursor.getString(1);
+            String description = cursor.getString(2);
+            int price = cursor.getInt(3);
+            int salon_id = cursor.getInt(4);
+
+            returnList.add(new Service(id, name, description, price, null));
+        } while(cursor.moveToNext());
+
+        return returnList;
+    }*/
+
+    @Override
     public boolean addService(Service service) {
         SQLiteDatabase write = databaseHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();

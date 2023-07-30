@@ -337,7 +337,7 @@
                         android:layout_width="wrap_content"
                         android:text="customerEmail"
                         android:textColor="@color/black"
-                        android:id="@+id/bhdTxtInfoCustomer"
+                        android:id="@+id/bhdTxtInfoCustomerEmail"
                         android:layout_gravity="right"
                         />
                 </TableRow>

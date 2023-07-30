@@ -59,6 +59,20 @@
             />
     </LinearLayout>
 
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:menu="@menu/booking_history_menu"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/white_button"
+        app:labelVisibilityMode="labeled"
+        app:elevation="0dp"
+        app:itemActiveIndicatorStyle="@android:color/transparent"
+        app:itemTextColor="@drawable/bottom_nav_color"
+        android:id="@+id/bhsBnvStatus"
+        />
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

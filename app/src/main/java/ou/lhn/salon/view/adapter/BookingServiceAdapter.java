@@ -63,7 +63,7 @@ public class BookingServiceAdapter extends ArrayAdapter<Service> {
         Service service = list.get(position);
 
         viewHolder.serviceSpTxtName.setText(service.getName().toString());
-        viewHolder.serviceSpTxtPrice.setText(Integer.toString(service.getPrice()));
+        viewHolder.serviceSpTxtPrice.setText(String.format("%d", service.getPrice()));
 
         return convertView;
     }

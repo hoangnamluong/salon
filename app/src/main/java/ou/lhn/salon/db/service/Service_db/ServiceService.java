@@ -6,6 +6,7 @@ import ou.lhn.salon.db.model.Service;
 
 public interface ServiceService {
     ArrayList<Service> getAllServices();
+    Service getServiceById(int serviceId);
     boolean addService(Service service);
     boolean updateService(Service service);
     boolean deleteService(int serviceId);

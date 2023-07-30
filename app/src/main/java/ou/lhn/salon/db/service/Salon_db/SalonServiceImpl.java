@@ -13,6 +13,7 @@ import java.util.Date;
 import ou.lhn.salon.db.DatabaseConstant;
 import ou.lhn.salon.db.DatabaseHelper;
 import ou.lhn.salon.db.model.Salon;
+import ou.lhn.salon.util.DateTimeFormat;
 
 public class SalonServiceImpl implements SalonSerivce {
     private static SalonServiceImpl INSTANCE;
@@ -60,8 +61,8 @@ public class SalonServiceImpl implements SalonSerivce {
         Date createdAt;
         Date updatedAt;
         try {
-            createdAt = SimpleDateFormat.getDateTimeInstance().parse(cursor.getString(5));
-            updatedAt = SimpleDateFormat.getDateTimeInstance().parse(cursor.getString(6));
+            createdAt = DateTimeFormat.convertSqliteDateToDate(cursor.getString(5));
+            updatedAt = DateTimeFormat.convertSqliteDateToDate(cursor.getString(6));
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }

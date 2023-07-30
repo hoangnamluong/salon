@@ -55,7 +55,7 @@ public class BookingConfirmActivity extends AppCompatActivity {
     private Calendar calendar;
     private Voucher voucher;
     private Salon salon;
-    private int totalCost;
+    private long totalCost;
     private boolean isMember;
 
     @Override
@@ -116,7 +116,7 @@ public class BookingConfirmActivity extends AppCompatActivity {
         }
 
         if (voucher != null) {
-            int voucherPrice = (voucher.getPercentage() / Constant.PERCENT_100) * service.getPrice();
+            long voucherPrice = (voucher.getPercentage() / Constant.PERCENT_100) * service.getPrice();
             totalCost = service.getPrice() - voucherPrice;
 
             bookingConfirmTxtInfoVoucherPrice.setText(String.format("%d", voucherPrice));
@@ -177,11 +177,7 @@ public class BookingConfirmActivity extends AppCompatActivity {
                     }
                 });
 
-                Appointment appointment = new Appointment(1, calendar.getTime(), totalCost, Constant.Status.PENDING.value, true, voucher, customer, stylist, service, salon);
-
-                if(appointmentService.addAppointment(appointment)) {
-
-                }
+                Appointment appointment = new Appointment(1, calendar.getTime(), true, totalCost, Constant.Status.PENDING.value, customer, service, stylist, voucher, salon);
 
                 runOnUiThread(new Runnable() {
                     @Override
@@ -189,6 +185,16 @@ public class BookingConfirmActivity extends AppCompatActivity {
                         alertDialog.dismiss();
                     }
                 });
+
+                /*if(appointmentService.addAppointment(appointment)) {
+                    Intent intent = new Intent(BookingConfirmActivity.this, StaffMainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                }*/
+
+                Intent intent = new Intent(BookingConfirmActivity.this, StaffMainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             }
         }).start();
     }

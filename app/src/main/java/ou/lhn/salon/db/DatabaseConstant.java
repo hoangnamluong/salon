@@ -29,6 +29,7 @@ public class DatabaseConstant {
     public static final String TABLE_APPOINTMENT = "appointment";
     public static final String APPOINTMENT_ID = "id";
     public static final String APPOINTMENT_DATE = "appointment_date";
+    public static final String APPOINTMENT_COST = "cost";
     public static final String APPOINTMENT_STATUS = "status";
     public static final String APPOINTMENT_ACTIVE = "active";
     public static final String FK_APPOINTMENT_VOUCHER = "voucher_id";
@@ -121,6 +122,7 @@ public class DatabaseConstant {
             APPOINTMENT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             APPOINTMENT_DATE + " NVARCHAR(30) NOT NULL DEFAULT CURRENT_TIMESTAMP," +
             APPOINTMENT_ACTIVE + " BOOLEAN NOT NULL DEFAULT 1," +
+            APPOINTMENT_COST + " INTEGER," +
             APPOINTMENT_STATUS + " VARCHAR(20) NOT NULL DEFAULT 'PENDING'," +
             FK_APPOINTMENT_CUSTOMER + " INTEGER NOT NULL," +
             FK_APPOINTMENT_SERVICE + " INTEGER NOT NULL," +

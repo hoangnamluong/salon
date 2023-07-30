@@ -76,37 +76,29 @@
             </LinearLayout>
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Booked Date"
-            android:layout_marginTop="16dp"
-            android:textColor="@color/smoke"
-            android:id="@+id/bhiTxtBookedDate"
-            />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="16dp"
             >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Service Name"
-                android:textColor="@color/text_smoke"
-                android:id="@+id/bhiTxtServiceName"
-                android:layout_weight="1"
-                android:layout_marginEnd="16dp"
+                android:text="Booked Date"
+                android:textColor="@color/smoke"
+                android:id="@+id/bhiTxtBookedDate"
                 />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical"
+                android:layout_weight="1"
+                android:gravity="center_vertical|end"
                 >
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

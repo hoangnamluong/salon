@@ -16,6 +16,8 @@ public class Salon {
     private byte[] image;
 
     public Salon() {
+        createdAt = new Date();
+        updatedAt = new Date();
     }
 
     public Salon(int id, String name, String address, String description, boolean active, byte[] image) {
@@ -24,8 +26,8 @@ public class Salon {
         this.address = address;
         this.description = description;
         this.active = active;
-        createdAt = new Date();
-        updatedAt = new Date();
+        this.createdAt = new Date();
+        this.updatedAt = new Date();
         this.image = image;
     }
 

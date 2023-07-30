@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import ou.lhn.salon.R;
 import ou.lhn.salon.db.model.Appointment;
@@ -26,7 +27,6 @@ public class BookingHistoryAdapter extends ArrayAdapter<Appointment> {
         TextView bhiTxtCustomerName,
                 bhiTxtCustomPhone,
                 bhiTxtBookedDate,
-                bhiTxtServiceName ,
                 bhiTxtCost;
     }
 
@@ -49,7 +49,6 @@ public class BookingHistoryAdapter extends ArrayAdapter<Appointment> {
             viewHolder.bhiTxtCustomerName = convertView.findViewById(R.id.bhiTxtCustomerName);
             viewHolder.bhiTxtCustomPhone = convertView.findViewById(R.id.bhiTxtCustomPhone);
             viewHolder.bhiTxtBookedDate = convertView.findViewById(R.id.bhiTxtBookedDate);
-            viewHolder.bhiTxtServiceName = convertView.findViewById(R.id.bhiTxtServiceName);
             viewHolder.bhiTxtCost = convertView.findViewById(R.id.bhiTxtCost);
 
             convertView.setTag(viewHolder);
@@ -62,9 +61,8 @@ public class BookingHistoryAdapter extends ArrayAdapter<Appointment> {
 
         viewHolder.bhiTxtCustomerName.setText(appointment.getCustomer().getFullName());
         viewHolder.bhiTxtCustomPhone.setText(appointment.getCustomer().getPhone());
-        viewHolder.bhiTxtBookedDate.setText(new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(appointment.getAppointmentDate()));
-        viewHolder.bhiTxtServiceName.setText(appointment.getService().getName());
-        viewHolder.bhiTxtCost.setText(appointment.getCost());
+        viewHolder.bhiTxtBookedDate.setText(new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault()).format(appointment.getAppointmentDate()));
+        viewHolder.bhiTxtCost.setText(String.format("%d", appointment.getCost()));
 
         return convertView;
     }
