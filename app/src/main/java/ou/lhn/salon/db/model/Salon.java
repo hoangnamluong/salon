@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Date;
 
-public class Salon {
+public class Salon{
     private int id;
     private String name;
     private String address;

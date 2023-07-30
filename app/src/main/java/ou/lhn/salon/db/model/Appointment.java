@@ -6,6 +6,8 @@ import java.util.Date;
 public class Appointment implements Serializable {
     private int id;
     private Date appointmentDate;
+    private long cost;
+    private String status;
     private boolean active;
     private long cost;
     private String status;
@@ -31,7 +33,21 @@ public class Appointment implements Serializable {
         this.salon = salon;
     }
 
-
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "id=" + id +
+                ", appointmentDate=" + appointmentDate +
+                ", cost=" + cost +
+                ", status='" + status + '\'' +
+                ", active=" + active +
+                ", voucher=" + voucher +
+                ", customer=" + customer +
+                ", stylist=" + stylist +
+                ", service=" + service +
+                ", salon=" + salon +
+                '}';
+    }
 
     public int getId() {
         return id;
@@ -56,7 +72,7 @@ public class Appointment implements Serializable {
     public void setActive(boolean active) {
         this.active = active;
     }
-
+  
     public long getCost() {
         return cost;
     }
@@ -103,6 +119,14 @@ public class Appointment implements Serializable {
 
     public void setVoucher(Voucher voucher) {
         this.voucher = voucher;
+    }
+
+    public Salon getSalon() {
+        return salon;
+    }
+
+    public void setSalon(Salon salon) {
+        this.salon = salon;
     }
 
     public Salon getSalon() {

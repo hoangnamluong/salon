@@ -85,6 +85,9 @@ public class DatabaseConstant {
     public static final String UV_VOUCHER = "voucher_id";
     public static final String UV_ACTIVE = "active";
 
+    //STAT REVENUE
+    public static final String APPOINTMENT_COUNT = "appointent_count";
+    public static final String TOTAL_REVENUE = "total_revenue";
 
     //SALON QUERY
     public static final String SALON_QUERY = "CREATE TABLE IF NOT EXISTS " + TABLE_SALON + " (" +
@@ -152,7 +155,7 @@ public class DatabaseConstant {
             "CONSTRAINT fk_rating_customer FOREIGN KEY (" + FK_RATING_CUSTOMER + ") " +
                 "REFERENCES " + TABLE_USER + "(" + USER_ID + ") ON UPDATE CASCADE ON DELETE CASCADE," +
             "CONSTRAINT fk_rating_stylist FOREIGN KEY (" + FK_RATING_STYLIST + ") " +
-                "REFERENCES " + TABLE_STYLIST + "(" + STYLIST_ID + ") ON UPDATE CASCADE ON DELETE CASCADE" +
+                 "REFERENCES " + TABLE_STYLIST + "(" + STYLIST_ID + ") ON UPDATE CASCADE ON DELETE CASCADE" +
             ")";
     public static final String RATING_DROP = "DROP TABLE IF EXISTS " + TABLE_RATING;
 
@@ -164,7 +167,7 @@ public class DatabaseConstant {
             SCHEDULE_TO_TIME + " VARCHAR(25) NOT NULL," +
             FK_SCHEDULE_SALON + " INTEGER NOT NULL," +
             "CONSTRAINT fk_schedule_salon FOREIGN KEY (" + FK_SCHEDULE_SALON + ") " +
-                "REFERENCES " + TABLE_SALON + "(" + SALON_ID + ") ON UPDATE CASCADE ON DELETE CASCADE" +
+            "REFERENCES " + TABLE_SALON + "(" + SALON_ID + ") ON UPDATE CASCADE ON DELETE CASCADE" +
             ")";
     public static final String SCHEDULE_DROP = "DROP TABLE IF EXISTS " + TABLE_SCHEDULE;
 
@@ -176,7 +179,7 @@ public class DatabaseConstant {
             SERVICE_PRICE + " INTEGER NOT NULL DEFAULT 50000," +
             FK_SERVICE_SALON + " INTEGER NOT NULL," +
             "CONSTRAINT fk_service_salon FOREIGN KEY (" + FK_SERVICE_SALON + ") " +
-                "REFERENCES " + TABLE_SALON + "(" + SALON_ID + ") ON UPDATE CASCADE ON DELETE CASCADE" +
+            "REFERENCES " + TABLE_SALON + "(" + SALON_ID + ") ON UPDATE CASCADE ON DELETE CASCADE" +
             ")";
     public static final String SERVICE_DROP = "DROP TABLE IF EXISTS " + TABLE_SERVICE;
 
@@ -189,7 +192,7 @@ public class DatabaseConstant {
             STYLIST_AVATAR + " BLOB," +
             FK_STYLIST_SALON + " INTEGER NOT NULL," +
             "CONSTRAINT fk_stylist_salon FOREIGN KEY (" + FK_STYLIST_SALON + ") " +
-                "REFERENCES " + TABLE_SALON + "(" + SALON_ID + ") ON UPDATE CASCADE ON DELETE CASCADE" +
+            "REFERENCES " + TABLE_SALON + "(" + SALON_ID + ") ON UPDATE CASCADE ON DELETE CASCADE" +
             ")";
     public static final String STYLIST_DROP = "DROP TABLE IF EXISTS " + TABLE_STYLIST;
 
@@ -211,7 +214,7 @@ public class DatabaseConstant {
             "CONSTRAINT fk_uv_user FOREIGN KEY (" + UV_USER + ") " +
                 "REFERENCES " + TABLE_USER + "(" + USER_ID + ") ON UPDATE CASCADE ON DELETE CASCADE," +
             "CONSTRAINT fk_uv_voucher FOREIGN KEY (" + UV_VOUCHER + ") " +
-                "REFERENCES " + TABLE_VOUCHER + "(" + VOUCHER_ID + ") ON UPDATE CASCADE ON DELETE CASCADE" +
+              "REFERENCES " + TABLE_VOUCHER + "(" + VOUCHER_ID + ") ON UPDATE CASCADE ON DELETE CASCADE" +
             ")";
     public static final String USER_VOUCHER_DROP = "DROP TABLE IF EXISTS " + TABLE_USER_VOUCHER;
 }

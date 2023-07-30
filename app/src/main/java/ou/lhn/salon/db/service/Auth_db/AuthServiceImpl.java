@@ -19,6 +19,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+
 import ou.lhn.salon.R;
 import ou.lhn.salon.activity.UserMainActivity;
 import ou.lhn.salon.data.Constant;
@@ -111,13 +112,13 @@ public class AuthServiceImpl implements AuthService {
             GlobalState.setLoggedIn(user);
             return true;
         }
-
         else
             return false;
     }
 
 
-    private String encrypt(String value) {
+    @Override
+    public String encrypt(String value) {
         try{
             SecretKeySpec secretKeySpec = new SecretKeySpec(AuthConstant.getSecretKey().getBytes(), AuthConstant.getALGORITHM());
 
