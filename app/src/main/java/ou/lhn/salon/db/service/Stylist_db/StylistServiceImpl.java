@@ -13,7 +13,7 @@ import ou.lhn.salon.db.DatabaseHelper;
 import ou.lhn.salon.db.model.Salon;
 import ou.lhn.salon.db.model.Stylist;
 
-public class StylistServiceImpl implements StylistService {
+public class StylistServiceImpl implements StylistService{
     private static StylistServiceImpl INSTANCE;
     private final DatabaseHelper databaseHelper;
 
@@ -188,7 +188,6 @@ public class StylistServiceImpl implements StylistService {
 
     @Override
     public boolean deleteStylist(int stylistId) {
-
         SQLiteDatabase write = databaseHelper.getWritableDatabase();
 
         try {

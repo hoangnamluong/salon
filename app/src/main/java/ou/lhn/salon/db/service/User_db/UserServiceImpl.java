@@ -11,6 +11,8 @@ import ou.lhn.salon.db.DatabaseConstant;
 import ou.lhn.salon.db.DatabaseHelper;
 import ou.lhn.salon.db.model.Salon;
 import ou.lhn.salon.db.model.User;
+import ou.lhn.salon.db.service.Salon_db.SalonSerivce;
+import ou.lhn.salon.db.service.Salon_db.SalonServiceImpl;
 
 public class UserServiceImpl implements UserService {
     private static UserServiceImpl INSTANCE;
@@ -213,8 +215,7 @@ public class UserServiceImpl implements UserService {
 
         return rowsAffected > 0;
     }
-
-
+  
     @Override
     public User isUserAMember(String phone) {
         SQLiteDatabase read = databaseHelper.getReadableDatabase();

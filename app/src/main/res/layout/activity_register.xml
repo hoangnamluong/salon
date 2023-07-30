@@ -121,13 +121,71 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/registerPhoneContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/registerEmailContainer"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/input_border"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="@string/icon_description"
+                android:src="@drawable/baseline_phone_24" />
+
+            <EditText
+                android:id="@+id/registerEditTxtPhone"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:hint="Phone"
+                android:inputType="textPhonetic"
+                android:padding="8dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/registerFullnameContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/registerPhoneContainer"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/input_border"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="@string/icon_description"
+                android:src="@drawable/baseline_person_24" />
+
+            <EditText
+                android:id="@+id/registerEditTxtFullname"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:hint="Fullname"
+                android:inputType="textPersonName"
+                android:padding="8dp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/input_border"
             android:padding="8dp"
             android:id="@+id/registerPasswordContainer"
             android:layout_marginTop="16dp"
-            android:layout_below="@id/registerEmailContainer"
+            android:layout_below="@id/registerFullnameContainer"
             android:orientation="horizontal"
             >
             <ImageView
@@ -195,7 +253,7 @@
             android:elevation="2dp"
             />
 
-            <ProgressBar
+        <ProgressBar
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_centerHorizontal="true"

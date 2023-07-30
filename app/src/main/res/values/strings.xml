@@ -96,4 +96,11 @@
         <item>2</item>
         <item>3</item>
     </integer-array>
+
+    <string name="pending">Pending</string>
+    <string name="completed">Completed</string>
+    <string name="by_date">By Date</string>
+    <string name="by_month">By Month</string>
+    <string name="by_year">By Year</string>
+
 </resources>

@@ -4,18 +4,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.io.ByteArrayOutputStream;
+
 import ou.lhn.salon.R;
+import ou.lhn.salon.db.model.User;
 import ou.lhn.salon.db.service.Auth_db.AuthService;
 import ou.lhn.salon.db.service.Auth_db.AuthServiceImpl;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
-    private EditText registerEditTxtUsername, registerEditTxtEmail, registerEditTxtPassword, registerEditTxtConfirmPassword;
+    private EditText registerEditTxtUsername, registerEditTxtEmail, registerEditTxtPassword, registerEditTxtConfirmPassword, registerEditTxtPhone, registerEditTxtFullName;
     private AppCompatButton registerBtnRegister;
     private TextView registerTxtLogin, registerTxtError;
     private ProgressBar registerLoadingBar;
@@ -33,6 +38,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private void initView() {
         registerEditTxtUsername = findViewById(R.id.registerEditTxtUsername);
         registerEditTxtEmail = findViewById(R.id.registerEditTxtEmail);
+        registerEditTxtPhone = findViewById(R.id.registerEditTxtPhone);
+        registerEditTxtFullName = findViewById(R.id.registerEditTxtFullname);
         registerEditTxtPassword = findViewById(R.id.registerEditTxtPassword);
         registerEditTxtConfirmPassword = findViewById(R.id.registerEditTxtConfirmPassword);
         registerBtnRegister = findViewById(R.id.registerBtnRegister);
@@ -50,7 +57,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.registerBtnRegister) {
-            // if(validateData())
+             if(validateData())
                  registerFunc();
         } else if (id == R.id.registerTxtLogin) {
             loginSwitchActivity();
@@ -61,6 +68,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         if(
             registerEditTxtUsername.getText().toString().equals("") ||
             registerEditTxtEmail.getText().toString().equals("") ||
+            registerEditTxtFullName.getText().toString().equals("") ||
+            registerEditTxtPhone.getText().toString().equals("") ||
             registerEditTxtPassword.getText().toString().equals("") ||
             registerEditTxtConfirmPassword.getText().toString().equals("")
         ) {
@@ -73,12 +82,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void registerFunc() {
-    /*    String username = registerEditTxtUsername.getText().toString();
+        String username = registerEditTxtUsername.getText().toString();
         String password = registerEditTxtPassword.getText().toString();
 
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
+        user.setEmail(registerEditTxtEmail.getText().toString());
+        user.setPhone(registerEditTxtPhone.getText().toString());
+        user.setFullName(registerEditTxtFullName.getText().toString());
 
         new Thread(new Runnable() {
             @Override
@@ -90,9 +102,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         registerBtnRegister.setVisibility(View.GONE);
                     }
                 });
-
-                boolean success = authRepo.registerUser(user);
-
+                long success = authService.registerUser(user);
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
@@ -102,10 +112,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if(success) {
-                            String string = "User=('username: " + username + "', 'password= " + password + ")";
-
-                            Toast.makeText(RegisterActivity.this, string, Toast.LENGTH_SHORT).show();
+                        System.out.println(success);
+                        if(success == -2) {
+                            Toast.makeText(RegisterActivity.this, "UserName already taken", Toast.LENGTH_LONG).show();
+                        }else if (success != -1) {
+                            loginSwitchActivity();
                         } else {
                             Toast.makeText(RegisterActivity.this, "Register Failed!", Toast.LENGTH_SHORT).show();
                         }
@@ -114,7 +125,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     }
                 });
             }
-        }).start(); */
+        }).start();
     }
 
     private void loginSwitchActivity() {

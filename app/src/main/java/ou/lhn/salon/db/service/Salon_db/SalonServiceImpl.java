@@ -14,6 +14,7 @@ import ou.lhn.salon.db.DatabaseConstant;
 import ou.lhn.salon.db.DatabaseHelper;
 import ou.lhn.salon.db.model.Salon;
 import ou.lhn.salon.db.model.Service;
+import ou.lhn.salon.util.DateTimeFormat;
 
 public class SalonServiceImpl implements SalonSerivce {
     private static SalonServiceImpl INSTANCE;
@@ -77,17 +78,17 @@ public class SalonServiceImpl implements SalonSerivce {
         String address = cursor.getString(2);
         String description = cursor.getString(3);
         boolean active = cursor.getInt(4) == 1;
-//        Date createdAt;
-//        Date updatedAt;
-//        try {
-//            createdAt = SimpleDateFormat.getDateTimeInstance().parse(cursor.getString(5));
-//            updatedAt = SimpleDateFormat.getDateTimeInstance().parse(cursor.getString(6));
-//        } catch (ParseException e) {
-//            throw new RuntimeException(e);
-//        }
+        Date createdAt;
+        Date updatedAt;
+        try {
+            createdAt = DateTimeFormat.convertSqliteDateToDate(cursor.getString(5));
+            updatedAt = DateTimeFormat.convertSqliteDateToDate(cursor.getString(6));
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
         byte[] avatar = cursor.getBlob(7);
 
-        return new Salon(id, name, address, description, active,avatar);
+        return new Salon(id, name, address, description, active, createdAt, updatedAt, avatar);
     }
 
     @Override
@@ -119,7 +120,6 @@ public class SalonServiceImpl implements SalonSerivce {
         cursor.close();
         return salonList;
     }
-
 
     @Override
     public Salon getSalonByStaffId(int staffId) {
@@ -174,7 +174,6 @@ public class SalonServiceImpl implements SalonSerivce {
 
     @Override
     public boolean deleteSalon(int id) {
-
         SQLiteDatabase write = databaseHelper.getWritableDatabase();
 
         try {
