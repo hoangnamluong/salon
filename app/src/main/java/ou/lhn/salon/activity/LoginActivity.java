@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ou.lhn.salon.R;
+import ou.lhn.salon.data.Constant;
+import ou.lhn.salon.data.GlobalState;
 import ou.lhn.salon.db.service.Auth_db.AuthServiceImpl;
 
 public class LoginActivity extends AppCompatActivity implements View .OnClickListener{
@@ -85,7 +87,18 @@ public class LoginActivity extends AppCompatActivity implements View .OnClickLis
                 loginBtnLogin.setEnabled(false);
                 loginLoadingBar.setVisibility(View.VISIBLE);
                 loginBtnLogin.setVisibility(View.GONE);
-                Toast.makeText(this, "Login", Toast.LENGTH_SHORT).show();
+                if(authService.loginUser(loginEditTxtUsername.getText().toString(), loginEditTxtPassword.getText().toString())) {
+                    Toast.makeText(this, "Login", Toast.LENGTH_SHORT).show();
+                    if (GlobalState.getLoggedIn().getRole()== Constant.ROLE.USER.value)
+                        userActivitySwitch();
+                    if (GlobalState.getLoggedIn().getRole()== Constant.ROLE.STAFF.value)
+                        staffActivitySwitch();
+                    if (GlobalState.getLoggedIn().getRole()== Constant.ROLE.STAFF.value)
+                        adminActivitySwitch();
+                }
+                else
+                    Toast.makeText(this, "Wrong username or password", Toast.LENGTH_LONG).show();
+
             });
 
             try {
@@ -109,6 +122,23 @@ public class LoginActivity extends AppCompatActivity implements View .OnClickLis
     private void registerActivitySwitch() {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
+    }
+
+    private void userActivitySwitch() {
+        Intent intent = new Intent(this, UserMainActivity.class);
+        startActivity(intent);
+    }
+
+    private void staffActivitySwitch() {
+        Intent intent = new Intent(this, StaffMainActivity.class);
+        startActivity(intent);
+    }
+
+    private void adminActivitySwitch() {
+        Toast.makeText(this, "Admin", Toast.LENGTH_LONG).show();
+//        thay cái mainactivity thành admin của m nha
+//        Intent intent = new Intent(this, UserMainActivity.class);
+//        startActivity(intent);
     }
 
 }
