@@ -1,11 +1,13 @@
 package ou.lhn.salon.db.service.Voucher_db;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -34,7 +36,18 @@ public class VoucherServiceImpl implements VoucherService{
 
     @Override
     public ArrayList<Voucher> getAllVoucher() {
-        return null;
+        SQLiteDatabase db = databaseHelper.getReadableDatabase();
+        Cursor cs = db.rawQuery("select * from "+DatabaseConstant.TABLE_VOUCHER, null);
+        cs.moveToFirst();
+        ArrayList<Voucher> arr = new ArrayList<>();
+        if (cs == null || cs.getCount()<=0){
+            return null;
+        }
+        do {
+            arr.add(new Voucher(cs.getInt(0), cs.getString(1), cs.getInt(2), new Date(cs.getLong(3)), cs.getInt(4)==1));
+        } while (cs.moveToNext());
+        return arr;
+
     }
 
     @Override
@@ -68,7 +81,13 @@ public class VoucherServiceImpl implements VoucherService{
 
     @Override
     public boolean addVoucher(Voucher voucher) {
-        return false;
+        SQLiteDatabase db = databaseHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DatabaseConstant.VOUCHER_CODE, voucher.getCode());
+        values.put(DatabaseConstant.VOUCHER_PERCENTAGE, voucher.getPercentage());
+        values.put(DatabaseConstant.VOUCHER_ACTIVE, voucher.isActive());
+        values.put(DatabaseConstant.VOUCHER_EXPIRED_DATE, voucher.getExpiredDate().toString());
+        return db.insert(DatabaseConstant.TABLE_VOUCHER, null, values) != -1;
     }
 
     @Override
