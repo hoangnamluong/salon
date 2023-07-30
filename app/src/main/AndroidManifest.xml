@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,11 +15,68 @@
         android:theme="@style/Theme.Salon"
         tools:targetApi="31">
         <activity
+            android:name=".activity.RevenueStatisticsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.VoucherManagementActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ServiceManagementActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.StylistManagementActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SalonManagementActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.EditVoucherActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddVoucherActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.EditServiceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddServiceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.EditStylistActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddStylistActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.EditSalonActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddSalonActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.EditUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.UserManagementActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AdminHomeActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".activity.BookingHistoryActivityStaff"
             android:exported="false" />
         <activity
             android:name=".activity.SalonListActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".activity.RegisterActivity"
             android:exported="false" />

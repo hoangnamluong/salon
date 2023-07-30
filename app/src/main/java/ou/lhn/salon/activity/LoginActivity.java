@@ -12,15 +12,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ou.lhn.salon.R;
-import ou.lhn.salon.db.service.Auth.AuthService;
-import ou.lhn.salon.db.service.Auth.AuthServiceImpl;
+import ou.lhn.salon.db.service.Auth_db.AuthServiceImpl;
 
 public class LoginActivity extends AppCompatActivity implements View .OnClickListener{
     private EditText loginEditTxtUsername, loginEditTxtPassword;
     private TextView loginTxtForgotPassword, loginTxtRegister, loginTxtError;
     private AppCompatButton loginBtnLogin;
     private RelativeLayout loginLoadingBar;
-    private AuthServiceImpl authService = AuthServiceImpl.getInstance();
+    private AuthServiceImpl authService = AuthServiceImpl.getInstance(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -59,13 +59,13 @@ public class BookingHistoryAdapter extends ArrayAdapter<Appointment> {
         }
 
         Appointment appointment = list.get(position);
-        String bookedDate = appointment.getAppointmentDate() + " " + appointment.getAppointmentTime();
+        String bookedDate = appointment.getAppointmentDate() + " " + appointment.getAppointmentDate();
 
         viewHolder.bhiTxtCustomerName.setText(appointment.getCustomer().getFullName());
         viewHolder.bhiTxtCustomPhone.setText(appointment.getCustomer().getPhone());
         viewHolder.bhiTxtBookedDate.setText(bookedDate);
         viewHolder.bhiTxtServiceName.setText(appointment.getService().getName());
-        viewHolder.bhiTxtCost.setText(appointment.getCost());
+        viewHolder.bhiTxtCost.setText(appointment.getCost() + "");
 
         return convertView;
     }

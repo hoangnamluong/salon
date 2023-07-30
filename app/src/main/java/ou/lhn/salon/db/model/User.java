@@ -1,39 +1,34 @@
 package ou.lhn.salon.db.model;
 
+import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
 
-public class User {
+public class User implements Serializable {
     private int id;
     private String fullName;
     private String username;
     private String password;
     private String email;
     private String phone;
-    private Date birth;
-    private boolean gender;
     private boolean active;
-    private Date createdAt;
-    private Date updatedAt;
-    private String role;
-    private String avatar;
-
+    private int role;
+    private byte[] avatar;
+    private Salon salon;
     public User() {
     }
 
-    public User(int id, String fullName, String username, String password, String email, String phone, Date birth, boolean gender, boolean active, Date createdAt, Date updatedAt, String role, String avatar) {
+    public User(int id, String fullName, String username, String password, String email, String phone, boolean active, int role, byte[] avatar, Salon salon) {
         this.id = id;
         this.fullName = fullName;
         this.username = username;
         this.password = password;
         this.email = email;
         this.phone = phone;
-        this.birth = birth;
-        this.gender = gender;
         this.active = active;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
         this.role = role;
         this.avatar = avatar;
+        this.salon = salon;
     }
 
     @Override
@@ -45,13 +40,10 @@ public class User {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
-                ", birth=" + birth +
-                ", gender=" + gender +
                 ", active=" + active +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
                 ", role='" + role + '\'' +
-                ", avatar='" + avatar + '\'' +
+                ", avatar=" + Arrays.toString(avatar) +
+                ", salon=" + salon +
                 '}';
     }
 
@@ -103,22 +95,6 @@ public class User {
         this.phone = phone;
     }
 
-    public Date getBirth() {
-        return birth;
-    }
-
-    public void setBirth(Date birth) {
-        this.birth = birth;
-    }
-
-    public boolean isGender() {
-        return gender;
-    }
-
-    public void setGender(boolean gender) {
-        this.gender = gender;
-    }
-
     public boolean isActive() {
         return active;
     }
@@ -127,35 +103,27 @@ public class User {
         this.active = active;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public String getRole() {
+    public int getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(int role) {
         this.role = role;
     }
 
-    public String getAvatar() {
+    public byte[] getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(String avatar) {
+    public void setAvatar(byte[] avatar) {
         this.avatar = avatar;
+    }
+
+    public Salon getSalon() {
+        return salon;
+    }
+
+    public void setSalon(Salon salon) {
+        this.salon = salon;
     }
 }

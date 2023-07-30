@@ -1,4 +1,4 @@
-package ou.lhn.salon.db.service.Auth;
+package ou.lhn.salon.db.service.Auth_db;
 
 public class AuthConstant {
     private static final String ALGORITHM = "AES";

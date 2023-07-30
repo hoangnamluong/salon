@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/itemStylistMn"
+        android:title="Quản lý thợ"/>
+    <item android:id="@+id/itemServiecMn"
+        android:title="Quản lý dịch vụ"/>
+    <item android:id="@+id/itemScheduleMn"
+        android:title="Quản lý lịch biểu"/>
+</menu>

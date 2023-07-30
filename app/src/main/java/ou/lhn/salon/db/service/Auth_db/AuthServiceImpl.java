@@ -1,5 +1,8 @@
-package ou.lhn.salon.db.service.Auth;
+package ou.lhn.salon.db.service.Auth_db;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Base64;
 
 import java.nio.charset.StandardCharsets;
@@ -13,16 +16,17 @@ import ou.lhn.salon.db.model.User;
 
 public class AuthServiceImpl implements AuthService {
     private static AuthServiceImpl INSTANCE;
-    private final DatabaseHelper databaseHelper = DatabaseHelper.getInstance();
+    private final DatabaseHelper databaseHelper;
 
-    private AuthServiceImpl() {
+    private AuthServiceImpl(Context context) {
+        databaseHelper = DatabaseHelper.getInstance(context);
     }
 
-    public static AuthServiceImpl getInstance() {
+    public static AuthServiceImpl getInstance(Context context) {
         if(INSTANCE == null) {
             synchronized (AuthServiceImpl.class) {
                 if(INSTANCE == null)
-                    INSTANCE = new AuthServiceImpl();
+                    INSTANCE = new AuthServiceImpl(context);
             }
         }
 
@@ -36,11 +40,34 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public boolean loginUser(String username, String password) {
-        return false;
+        if(password.toLowerCase().trim().equals("1 OR 1".toLowerCase().trim()) || username.toLowerCase().trim().equals("1 OR 1".toLowerCase().trim())) {
+            return false;
+        }
+
+        SQLiteDatabase read = databaseHelper.getReadableDatabase();
+        String query = "SELECT username, password FROM user WHERE username = '" + username + "';";
+        String usernameFromDb, passwordFromDb;
+        Cursor cursor = read.rawQuery(query, null);
+
+        if(cursor == null || cursor.getCount() == 0) {
+            return false;
+        }
+
+        cursor.moveToFirst();
+
+        do {
+            usernameFromDb = cursor.getString(0);
+            passwordFromDb = cursor.getString(1);
+        } while(cursor.moveToNext());
+
+        if(password.equals(decrypt(passwordFromDb)))
+            return true;
+        else
+            return false;
     }
 
-
-    private String encrypt(String value) {
+    @Override
+    public String encrypt(String value) {
         try{
             SecretKeySpec secretKeySpec = new SecretKeySpec(AuthConstant.getSecretKey().getBytes(), AuthConstant.getALGORITHM());
 

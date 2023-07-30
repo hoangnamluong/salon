@@ -1,21 +1,26 @@
 package ou.lhn.salon.db.model;
 
-public class Stylist {
+import java.io.Serializable;
+import java.util.Arrays;
+
+public class Stylist implements Serializable {
     private int id;
     private String name;
     private int customerPerDay;
     private boolean active;
     private Salon salon;
+    private byte[] image;
 
     public Stylist() {
     }
 
-    public Stylist(int id, String name, int customerPerDay, boolean active, Salon salon) {
+    public Stylist(int id, String name, int customerPerDay, boolean active, Salon salon, byte[] image) {
         this.id = id;
         this.name = name;
         this.customerPerDay = customerPerDay;
         this.active = active;
         this.salon = salon;
+        this.image = image;
     }
 
     @Override
@@ -26,6 +31,7 @@ public class Stylist {
                 ", customerPerDay=" + customerPerDay +
                 ", active=" + active +
                 ", salon=" + salon +
+                ", image=" + Arrays.toString(image) +
                 '}';
     }
 
@@ -67,5 +73,13 @@ public class Stylist {
 
     public void setSalon(Salon salon) {
         this.salon = salon;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }

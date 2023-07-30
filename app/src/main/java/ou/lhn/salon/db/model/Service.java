@@ -1,16 +1,18 @@
 package ou.lhn.salon.db.model;
 
-public class Service {
+import java.io.Serializable;
+
+public class Service implements Serializable {
     private int id;
     private String name;
     private String description;
-    private int price;
+    private long price;
     private Salon salon;
 
     public Service() {
     }
 
-    public Service(int id, String name, String description, int price, Salon salon) {
+    public Service(int id, String name, String description, long price, Salon salon) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -53,11 +55,11 @@ public class Service {
         this.description = description;
     }
 
-    public int getPrice() {
+    public long getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(long price) {
         this.price = price;
     }
 

@@ -9,19 +9,17 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import ou.lhn.salon.R;
-import ou.lhn.salon.db.model.User;
-import ou.lhn.salon.db.service.Auth.AuthService;
-import ou.lhn.salon.db.service.Auth.AuthServiceImpl;
+import ou.lhn.salon.db.service.Auth_db.AuthService;
+import ou.lhn.salon.db.service.Auth_db.AuthServiceImpl;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
     private EditText registerEditTxtUsername, registerEditTxtEmail, registerEditTxtPassword, registerEditTxtConfirmPassword;
     private AppCompatButton registerBtnRegister;
     private TextView registerTxtLogin, registerTxtError;
     private ProgressBar registerLoadingBar;
-    private AuthService authService = AuthServiceImpl.getInstance();
+    private AuthService authService = AuthServiceImpl.getInstance(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

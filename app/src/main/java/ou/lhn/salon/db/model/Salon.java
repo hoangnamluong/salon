@@ -2,23 +2,34 @@ package ou.lhn.salon.db.model;
 
 import androidx.annotation.Nullable;
 
+import java.util.Arrays;
 import java.util.Date;
 
-public class Salon {
+public class Salon{
     private int id;
     private String name;
     private String address;
     private String description;
     private boolean active;
-    private Date createdAt = new Date();
+    private Date createdAt;
     private Date updatedAt;
-    private String image;
-    private User manager;
+    private byte[] image;
 
     public Salon() {
     }
 
-    public Salon(int id, String name, String address, String description, boolean active, Date createdAt, Date updatedAt, String image, User manager) {
+    public Salon(int id, String name, String address, String description, boolean active, byte[] image) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.description = description;
+        this.active = active;
+        createdAt = new Date();
+        updatedAt = new Date();
+        this.image = image;
+    }
+
+    public Salon(int id, String name, String address, String description, boolean active, Date createdAt, Date updatedAt, byte[] image) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -27,7 +38,6 @@ public class Salon {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.image = image;
-        this.manager = manager;
     }
 
     @Override
@@ -40,8 +50,7 @@ public class Salon {
                 ", active=" + active +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
-                ", image='" + image + '\'' +
-                ", manager=" + manager +
+                ", image=" + Arrays.toString(image) +
                 '}';
     }
 
@@ -101,19 +110,11 @@ public class Salon {
         this.updatedAt = updatedAt;
     }
 
-    public String getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(byte[] image) {
         this.image = image;
-    }
-
-    public User getManager() {
-        return manager;
-    }
-
-    public void setManager(User manager) {
-        this.manager = manager;
     }
 }
