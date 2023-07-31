@@ -9,8 +9,6 @@ public class Appointment implements Serializable {
     private long cost;
     private String status;
     private boolean active;
-    private long cost;
-    private String status;
     private User customer;
     private Service service;
     private Stylist stylist;
@@ -129,11 +127,4 @@ public class Appointment implements Serializable {
         this.salon = salon;
     }
 
-    public Salon getSalon() {
-        return salon;
-    }
-
-    public void setSalon(Salon salon) {
-        this.salon = salon;
-    }
 }

@@ -161,8 +161,10 @@ public class EditUserActivity extends AppCompatActivity implements View.OnClickL
     private void displaySalonData() {
         User user = userService.getUserById(userId);
         if (user != null) {
-            Bitmap bitmap = BitmapFactory.decodeByteArray(user.getAvatar(), 0, user.getAvatar().length);
-            imgAvatar.setImageBitmap(bitmap);
+            if(user.getAvatar() != null) {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(user.getAvatar(), 0, user.getAvatar().length);
+                imgAvatar.setImageBitmap(bitmap);
+            }
             edtUserName.setText(user.getUsername());
             edtFullname.setText(user.getFullName());
             edtEmail.setText(user.getEmail());

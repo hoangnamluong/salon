@@ -85,8 +85,12 @@ public class AdminUserAdapter extends BaseAdapter {
         holder.txtFullname.setText(user.getFullName());
 
         byte[] image = user.getAvatar();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
-        holder.imgAvatar.setImageBitmap(bitmap);
+
+        if(image != null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+            holder.imgAvatar.setImageBitmap(bitmap);
+        }
+
         holder.imgActive.setImageResource(user.isActive() ? R.drawable.ic_active_management_20 : R.drawable.ic_cross_management_20);
 
         // Đặt xử lý sự kiện cho nút Edit và Delete nếu cần
