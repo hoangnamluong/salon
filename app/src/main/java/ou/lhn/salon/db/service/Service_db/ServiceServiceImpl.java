@@ -63,12 +63,13 @@ public class ServiceServiceImpl implements ServiceService {
     public ArrayList<Service> getAllServicesBySalonId(int salonId) {
         SQLiteDatabase read = databaseHelper.getReadableDatabase();
         String query = "SELECT * FROM " + DatabaseConstant.TABLE_SERVICE + " WHERE " + DatabaseConstant.FK_SERVICE_SALON + " = " + salonId;
-        
+
         Cursor cursor = read.rawQuery(query, null);
         ArrayList<Service> returnList = new ArrayList<>();
 
         if(cursor == null || cursor.getCount() == 0) {
             return null;
+        }
 
         cursor.moveToFirst();
 
@@ -90,24 +91,8 @@ public class ServiceServiceImpl implements ServiceService {
         return returnList;
     }
 
-    public Service getServiceById(int serviceId) {
-        SQLiteDatabase read = databaseHelper.getReadableDatabase();
-        String query = "SELECT * FROM " + DatabaseConstant.TABLE_SERVICE +
-                " WHERE " + DatabaseConstant.SERVICE_ID + " = " + serviceId;
-      
-        Cursor cursor = read.rawQuery(query, selectionArgs);
-        if (cursor == null || cursor.getCount() == 0) {
-        int id = cursor.getInt(0);
-        String name = cursor.getString(1);
-        String description = cursor.getString(2);
-        int price = cursor.getInt(3);
-        int salon_id = cursor.getInt(4);
-
-        return new Service(id, name, description, price, null);
-    }
-        
     @Override
-    public ArrayList<Service> getServiceListByName(String name) {
+    public ArrayList<Service> getServiceListByName(String name){
         ArrayList<Service> serviceList = new ArrayList<>();
         SQLiteDatabase read = databaseHelper.getReadableDatabase();
 
@@ -116,17 +101,38 @@ public class ServiceServiceImpl implements ServiceService {
         String[] selectionArgs = new String[]{"%" + name + "%"};
 
         Cursor cursor = read.rawQuery(query, selectionArgs);
-        if (cursor == null || cursor.getCount() == 0) {
-        int id = cursor.getInt(0);
-        String name = cursor.getString(1);
-        String description = cursor.getString(2);
-        int price = cursor.getInt(3);
-        int salon_id = cursor.getInt(4);
 
-        return new Service(id, name, description, price, null);
+        if (cursor == null || cursor.getCount() == 0) {
+            return serviceList;
+        }
+
+        cursor.moveToFirst();
+
+        do {
+            int id = cursor.getInt(0);
+            String name1 = cursor.getString(1);
+            String description = cursor.getString(2);
+            long price = cursor.getLong(3);
+            int salon_id = cursor.getInt(4);
+
+            Salon salon = new Salon();
+            salon.setId(salon_id);
+
+
+
+            serviceList.add(new Service(id, name1, description, price, salon));
+        } while (cursor.moveToNext());
+
+        // Đảm bảo giải phóng Cursor sau khi sử dụng.
+        if (cursor != null) {
+            cursor.close();
+        }
+
+        return serviceList;
     }
 
-    /*@Override
+
+    @Override
     public ArrayList<Service> getServiceByAppointmentId(int appointmentId) {
         SQLiteDatabase read = databaseHelper.getReadableDatabase();
         String query = "SELECT s.*" +
@@ -153,11 +159,11 @@ public class ServiceServiceImpl implements ServiceService {
             salon.setId(salonId);
 
             Service service = new Service(id, serviceName, description, price, salon);
-            serviceList.add(service);
+            returnList.add(service);
         } while (cursor.moveToNext());
 
         cursor.close();
-        return serviceList;
+        return returnList;
     }
 
 
