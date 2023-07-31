@@ -14,5 +14,4 @@ public interface StylistService {
     boolean updateStylist(Stylist stylist);
     boolean deleteStylist(int stylistId);
     int countCustomerToday(int stylistId);
-    Stylist getStylistById(int salonId);
 }

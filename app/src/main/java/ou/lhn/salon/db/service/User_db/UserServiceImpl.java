@@ -92,32 +92,6 @@ public class UserServiceImpl implements UserService {
         return userList;
     }
 
-    public User getUserById(int userId) {
-        SQLiteDatabase read = databaseHelper.getReadableDatabase();
-        String query = "SELECT *" +
-                " FROM " + DatabaseConstant.TABLE_USER +
-                " WHERE " + DatabaseConstant.USER_ID + " = " + userId;
-
-        Cursor cursor = read.rawQuery(query, null);
-
-        if(cursor == null || cursor.getCount() == 0)
-            return null;
-
-        cursor.moveToFirst();
-
-        int id = cursor.getInt(0);
-        String fullName = cursor.getString(1);
-        String username = cursor.getString(2);
-        String email = cursor.getString(4);
-        String phone = cursor.getString(5);
-        boolean active = cursor.getInt(6) == 1;
-        int role = cursor.getInt(7);
-        byte[] avatar = cursor.getBlob(8);
-
-        Salon salon = new Salon();
-        salon.setId(cursor.getInt(9));
-
-        return new User(id, fullName, username, "", email, phone, active, role, avatar, salon);
     public User getUserById(int id) {
         SQLiteDatabase read = databaseHelper.getReadableDatabase();
         String query = "SELECT * FROM " + DatabaseConstant.TABLE_USER + " WHERE " + DatabaseConstant.USER_ID + " = " + id;

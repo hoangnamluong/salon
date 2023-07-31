@@ -91,10 +91,12 @@ public class AdminSalonAdapter extends BaseAdapter {
         holder.imgActive.setImageResource(salon.isActive() ? R.drawable.ic_active_management_20 : R.drawable.ic_cross_management_20);
         holder.txtId.setText(String.valueOf(salon.getId()));
         holder.txtName.setText(salon.getName());
-
         byte[] image = salon.getImage();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
-        holder.imgImage.setImageBitmap(bitmap);
+
+        if(image != null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
+            holder.imgImage.setImageBitmap(bitmap);
+        }
 
         // Đặt xử lý sự kiện cho nút Edit và Delete nếu cần
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {

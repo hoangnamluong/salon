@@ -115,8 +115,11 @@ public class EditSalonActivity extends AppCompatActivity implements View.OnClick
     private void displaySalonData() {
         Salon salon = salonSerivce.getSalonById(salonId);
         if (salon != null) {
-            Bitmap bitmap = BitmapFactory.decodeByteArray(salon.getImage(), 0, salon.getImage().length);
-            imgSalon.setImageBitmap(bitmap);
+            if(salon.getImage() != null) {
+                Bitmap bitmap = BitmapFactory.decodeByteArray(salon.getImage(), 0, salon.getImage().length);
+                imgSalon.setImageBitmap(bitmap);
+            }
+
             edtNameSalon.setText(salon.getName());
             edtDescription.setText(salon.getDescription());
             edtAddress.setText(salon.getAddress());
